@@ -33,7 +33,7 @@ services:
       timeout: 10s
       retries: 5
 
-  test-runner:
+  test-performance:
     image: olevova1983/performancetest:latest
     depends_on:
       selenium-hub:
