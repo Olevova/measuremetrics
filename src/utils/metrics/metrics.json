@@ -1,0 +1,40 @@
+{
+  "2024-06-24": {
+    "Time metrics for invite user by CA": {
+      "time to opent invite user form": 40.41,
+      "time to close invite user form": 687.88
+    },
+    "Time metrics for project creation by the SA": {
+      "project list load time": 526.22,
+      "form load time for project creation": 97.77,
+      "project creation form closing time": 706.17,
+      "time for the project to appear in the list of projects": 1775.86,
+      "time to open project page": 564.4
+    },
+    "Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM": {
+      "time to open project page": 494.85,
+      "open Add room menu time": 106.02,
+      "open create room form time": 47.93,
+      "appeare input for area": 127.01,
+      "close form for room cteating": 689,
+      "open form for room creation based on the template": 359.59,
+      "open edit template form time": 281.52,
+      "open UnitAdd menu time": 31.18,
+      "open Unit creation form time": 3231.67,
+      "time Unit creation form is closed and new Unit is appeared": 1055.61,
+      "time to duplicate the unit": 275.47,
+      "create a task form opening time": 73.85,
+      "close form and appear tasks list time": 1290.04,
+      "time to hide tasks done": 1045.07,
+      "filter tasks time": 1089.76
+    },
+    "Time metrics for change area status, weight and add comments by PM": {
+      "Open area ditails Pop Up time": 271.16,
+      "dropdown show statuses time": 43.79,
+      "saved new areas status time": 2969.15,
+      "dropdown show weight time": 53.28,
+      "saved new areas weight time": 2710.03,
+      "save area comment time": 407.42
+    }
+  }
+}

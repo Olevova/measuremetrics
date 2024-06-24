@@ -1,0 +1,409 @@
+{
+  "stats": {
+    "suites": 3,
+    "tests": 9,
+    "passes": 9,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-06-21T10:02:17.444Z",
+    "end": "2024-06-21T10:03:22.820Z",
+    "duration": 65376,
+    "testsRegistered": 9,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "0aacd019-251e-4aff-93df-1b8d6385dff7",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b2408564-ee74-4785-be69-af4958afedd7",
+          "title": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60",
+          "fullFile": "C:\\terenbro\\colorjobMETRICS\\test\\parallel\\createEditRemoveFloor3.test.js",
+          "file": "\\test\\parallel\\createEditRemoveFloor3.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 \"before each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "timedOut": null,
+              "duration": 3635,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "driverChrome = await createWebdriverChrom();",
+              "err": {},
+              "uuid": "af67b7cc-9405-4464-88b6-62231fbfc13a",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 \"after each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "timedOut": null,
+              "duration": 214,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "if (driverChrome) {\n  await driverChrome.quit();\n}",
+              "err": {},
+              "uuid": "39d01561-7047-4355-9961-3501ad7de8df",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "create new floor",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 create new floor",
+              "timedOut": null,
+              "duration": 14779,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst createFloor = new CreateFloor(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.email);\nawait logginPageTest.fillPasswordInput(config.password);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.urlhomePageForCheck);\ntry {\n  await createFloor.goToView();\n  await createFloor.createFloor(newFloorName);\n  await createFloor.checkFloorCreation(newFloorName);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'floor_create');\n  throw error;\n}",
+              "err": {},
+              "uuid": "52fc861a-0f68-4764-a7fc-79d2e96f48ae",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "edit new floor",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 edit new floor",
+              "timedOut": null,
+              "duration": 15991,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst editFloor = new EditFloor(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.email);\nawait logginPageTest.fillPasswordInput(config.password);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.urlhomePageForCheck);\ntry {\n  await editFloor.goToView();\n  await editFloor.editFloor(newFloorName, editFloorName);\n  await editFloor.checkFloorCreation(editFloorName);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'floor_edit');\n  throw error;\n}",
+              "err": {},
+              "uuid": "013e5163-9da0-429f-9fb6-61991359ecfe",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "delete new floor",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 delete new floor",
+              "timedOut": null,
+              "duration": 16450,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst deleteFloor = new DeleteFloor(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.email);\nawait logginPageTest.fillPasswordInput(config.password);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.urlhomePageForCheck);\ntry {\n  await deleteFloor.goToView();\n  await deleteFloor.deleteFloor(editFloorName);\n  await deleteFloor.checkDeleteFloor(editFloorName);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'floor_delete');\n  throw error;\n}",
+              "err": {},
+              "uuid": "854e1b12-56c7-44f8-a4af-5dccaaff76bf",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "52fc861a-0f68-4764-a7fc-79d2e96f48ae",
+            "013e5163-9da0-429f-9fb6-61991359ecfe",
+            "854e1b12-56c7-44f8-a4af-5dccaaff76bf"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 47220,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        },
+        {
+          "uuid": "836706bc-8e7a-4ebb-ae91-3d5ed3579772",
+          "title": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60",
+          "fullFile": "C:\\terenbro\\colorjobMETRICS\\test\\parallel\\createEditRemoveFloor2.test.js",
+          "file": "\\test\\parallel\\createEditRemoveFloor2.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 \"before each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "timedOut": null,
+              "duration": 4336,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "driverChrome = await createWebdriverChrom();",
+              "err": {},
+              "uuid": "c4efde47-4871-4eb2-b620-1b82178336ec",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 \"after each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "timedOut": null,
+              "duration": 229,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "if (driverChrome) {\n  await driverChrome.quit();\n}",
+              "err": {},
+              "uuid": "292b54a3-80ee-4cfe-954d-20e61ce60b42",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "create new floor",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 create new floor",
+              "timedOut": null,
+              "duration": 15573,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst createFloor = new CreateFloor(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.email);\nawait logginPageTest.fillPasswordInput(config.password);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.urlhomePageForCheck);\ntry {\n  await createFloor.goToView();\n  await createFloor.createFloor(newFloorName);\n  await createFloor.checkFloorCreation(newFloorName);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'floor_create');\n  throw error;\n}",
+              "err": {},
+              "uuid": "0b7e3728-46d3-4f47-80ba-e457db4ccdea",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "edit new floor",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 edit new floor",
+              "timedOut": null,
+              "duration": 16699,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst editFloor = new EditFloor(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.email);\nawait logginPageTest.fillPasswordInput(config.password);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.urlhomePageForCheck);\ntry {\n  await editFloor.goToView();\n  await editFloor.editFloor(newFloorName, editFloorName);\n  await editFloor.checkFloorCreation(editFloorName);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'floor_edit');\n  throw error;\n}",
+              "err": {},
+              "uuid": "d65a2550-76e3-4982-8784-3dae25cf6f1f",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "delete new floor",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 delete new floor",
+              "timedOut": null,
+              "duration": 15830,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst deleteFloor = new DeleteFloor(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.email);\nawait logginPageTest.fillPasswordInput(config.password);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.urlhomePageForCheck);\ntry {\n  await deleteFloor.goToView();\n  await deleteFloor.deleteFloor(editFloorName);\n  await deleteFloor.checkDeleteFloor(editFloorName);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'floor_delete');\n  throw error;\n}",
+              "err": {},
+              "uuid": "1560cbcb-c739-42cf-a3ba-a9294e6b2b66",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0b7e3728-46d3-4f47-80ba-e457db4ccdea",
+            "d65a2550-76e3-4982-8784-3dae25cf6f1f",
+            "1560cbcb-c739-42cf-a3ba-a9294e6b2b66"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 48102,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        },
+        {
+          "uuid": "a8d165fc-3ac6-4632-98a5-271a3a69691e",
+          "title": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60",
+          "fullFile": "C:\\terenbro\\colorjobMETRICS\\test\\parallel\\createEditRemoveFloor.test.js",
+          "file": "\\test\\parallel\\createEditRemoveFloor.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 \"before each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "timedOut": null,
+              "duration": 4688,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "driverChrome = await createWebdriverChrom();",
+              "err": {},
+              "uuid": "dc6243a8-ba78-41fa-898d-989772a0c6e9",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 \"after each\" hook in \"Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60\"",
+              "timedOut": null,
+              "duration": 378,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "if (driverChrome) {\n  await driverChrome.quit();\n}",
+              "err": {},
+              "uuid": "4165c652-92fa-4f76-ba5e-ed0dd4d55e94",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "create new floor",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 create new floor",
+              "timedOut": null,
+              "duration": 16388,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst createFloor = new CreateFloor(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.email);\nawait logginPageTest.fillPasswordInput(config.password);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.urlhomePageForCheck);\ntry {\n  await createFloor.goToView();\n  await createFloor.createFloor(newFloorName);\n  await createFloor.checkFloorCreation(newFloorName);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'floor_create');\n  throw error;\n}",
+              "err": {},
+              "uuid": "badb5101-f87b-403d-a3af-ae71766c2055",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "edit new floor",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 edit new floor",
+              "timedOut": null,
+              "duration": 15968,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst editFloor = new EditFloor(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.email);\nawait logginPageTest.fillPasswordInput(config.password);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.urlhomePageForCheck);\ntry {\n  await editFloor.goToView();\n  await editFloor.editFloor(newFloorName, editFloorName);\n  await editFloor.checkFloorCreation(editFloorName);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'floor_edit');\n  throw error;\n}",
+              "err": {},
+              "uuid": "a852b4f7-bdae-4be4-9a2e-a9bc4d1eb521",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "delete new floor",
+              "fullTitle": "Create. edit and remove Floor in the chrom browser, test-cases #58, 59, 60 delete new floor",
+              "timedOut": null,
+              "duration": 16144,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst deleteFloor = new DeleteFloor(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.email);\nawait logginPageTest.fillPasswordInput(config.password);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.urlhomePageForCheck);\ntry {\n  await deleteFloor.goToView();\n  await deleteFloor.deleteFloor(editFloorName);\n  await deleteFloor.checkDeleteFloor(editFloorName);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'floor_delete');\n  throw error;\n}",
+              "err": {},
+              "uuid": "a757d298-06a3-414a-a47d-04b4261e0cae",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "badb5101-f87b-403d-a3af-ae71766c2055",
+            "a852b4f7-bdae-4be4-9a2e-a9bc4d1eb521",
+            "a757d298-06a3-414a-a47d-04b4261e0cae"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 48500,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 0
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "reports-parallel",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "colorjob",
+        "reportFilename": "reports-parallel"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

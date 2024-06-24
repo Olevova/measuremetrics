@@ -1,0 +1,429 @@
+{
+  "stats": {
+    "suites": 4,
+    "tests": 7,
+    "passes": 7,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-06-24T09:04:39.115Z",
+    "end": "2024-06-24T09:06:56.007Z",
+    "duration": 136892,
+    "testsRegistered": 7,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "3a6d2ae8-b9a4-4375-ac54-22c1b60348e1",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "028fd6bc-fc7c-4ff4-8728-522d06d23c16",
+          "title": "Create, edit and remove project by the SA and measure metrics",
+          "fullFile": "C:\\terenbro\\colorjobMETRICS\\test\\createEditRemoveProjectBySA.test.js",
+          "file": "\\test\\createEditRemoveProjectBySA.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Create, edit and remove project by the SA and measure metrics\"",
+              "fullTitle": "Create, edit and remove project by the SA and measure metrics \"before each\" hook in \"Create, edit and remove project by the SA and measure metrics\"",
+              "timedOut": false,
+              "duration": 1156,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driverChrome = await createWebdriverChrom();",
+              "err": {},
+              "uuid": "323da797-ca33-4bcf-b1b7-34acc82b89dd",
+              "parentUUID": "028fd6bc-fc7c-4ff4-8728-522d06d23c16",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"Create, edit and remove project by the SA and measure metrics\"",
+              "fullTitle": "Create, edit and remove project by the SA and measure metrics \"after each\" hook in \"Create, edit and remove project by the SA and measure metrics\"",
+              "timedOut": false,
+              "duration": 84,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (driverChrome) {\n  await driverChrome.quit();\n}",
+              "err": {},
+              "uuid": "cc6f2497-262c-4496-ac49-e149cfd216cf",
+              "parentUUID": "028fd6bc-fc7c-4ff4-8728-522d06d23c16",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "create new project",
+              "fullTitle": "Create, edit and remove project by the SA and measure metrics create new project",
+              "timedOut": false,
+              "duration": 18203,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst createProjectTest = new CreateProject(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.email);\nawait logginPageTest.fillPasswordInput(config.password);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.urlhomePageForCheck);\ntry {\n  const firstMeasure = await createProjectTest.goToProjectListMeasureTime();\n  const secondMeasure =\n    await createProjectTest.fillCreateProjectFieldsMeasureTime(\n      config.companyName,\n      newProjectkey,\n      newProjectNumber,\n      newCompanyProjectBelong,\n      newProjectStreet,\n      newProjectApp,\n      newProjectState,\n      newCompanProjectCity,\n      newProjectZip,\n      newProjectClientName,\n      startDate,\n      eneDate\n    );\n  const thirdMeasure =\n    await createProjectTest.goToProjectDetailsPageMeasureTime(\n      config.companyName\n    );\n  \n    createProjectMesuer['Time metrics for project creation by the SA'] = {\n    ...firstMeasure,\n    ...secondMeasure,\n    ...thirdMeasure,\n  };\n\n  saveMetrics(\n      config.metricsFilePath,\n      config.metricfileName,\n      createProjectMesuer\n  );\n  console.log(createProjectMesuer);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'project_create');\n  throw error;\n}",
+              "err": {},
+              "uuid": "41196759-37c4-4ad2-a227-722a2298ad74",
+              "parentUUID": "028fd6bc-fc7c-4ff4-8728-522d06d23c16",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "remove project",
+              "fullTitle": "Create, edit and remove project by the SA and measure metrics remove project",
+              "timedOut": false,
+              "duration": 5203,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst removeProject = new RemoveProject(driverChrome);\ntry {\n  await logginPageTest.openLoginForm();\n  await logginPageTest.fillEmailInput(config.email);\n  await logginPageTest.fillPasswordInput(config.password);\n  await logginPageTest.checkSaveForFuture();\n  await logginPageTest.login(config.urlhomePageForCheck);\n  await removeProject.goToProjectList();\n  await removeProject.findProject(config.companyName, config.projectsPage);\n  await removeProject.removefindProject(config.companyName);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'project_remove');\n  throw error;\n}",
+              "err": {},
+              "uuid": "fa9114a5-d85c-4c1e-aff0-62aa389c752a",
+              "parentUUID": "028fd6bc-fc7c-4ff4-8728-522d06d23c16",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "41196759-37c4-4ad2-a227-722a2298ad74",
+            "fa9114a5-d85c-4c1e-aff0-62aa389c752a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 23406,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 0
+        },
+        {
+          "uuid": "4d638811-26f9-4e1c-9790-2f5dbd62dbb0",
+          "title": "Invite and remove user by the Company Admin and measure metrics",
+          "fullFile": "C:\\terenbro\\colorjobMETRICS\\test\\inviteAndRemoveUserByCA.test.js",
+          "file": "\\test\\inviteAndRemoveUserByCA.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Invite and remove user by the Company Admin and measure metrics\"",
+              "fullTitle": "Invite and remove user by the Company Admin and measure metrics \"before each\" hook in \"Invite and remove user by the Company Admin and measure metrics\"",
+              "timedOut": false,
+              "duration": 1153,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driverChrome = await createWebdriverChrom();",
+              "err": {},
+              "uuid": "49facb6f-18b0-4b65-98c3-bea3c33025d6",
+              "parentUUID": "4d638811-26f9-4e1c-9790-2f5dbd62dbb0",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"Invite and remove user by the Company Admin and measure metrics\"",
+              "fullTitle": "Invite and remove user by the Company Admin and measure metrics \"after each\" hook in \"Invite and remove user by the Company Admin and measure metrics\"",
+              "timedOut": false,
+              "duration": 70,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (driverChrome) {\n  await driverChrome.quit();\n}\nreturn;",
+              "err": {},
+              "uuid": "95d5b2b9-5068-4255-9798-6d732f5044d6",
+              "parentUUID": "4d638811-26f9-4e1c-9790-2f5dbd62dbb0",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "invite user by the company admin",
+              "fullTitle": "Invite and remove user by the Company Admin and measure metrics invite user by the company admin",
+              "timedOut": false,
+              "duration": 12880,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// await driverChrome.executeScript(\"document.body.style.zoom='50%'\");\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst inviteUserTest = new InviteUser(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.emailCA);\nawait logginPageTest.fillPasswordInput(config.passwordCA);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.mainCompanyPage);\ntry {\n  await inviteUserTest.goToView(config.projectNameMain, 'ca');\n  await inviteUserTest.goToSelektTab(config.users);\n  const firstMeasure =\n    await inviteUserTest.openInviteUserFormInProjectMeasureTime();\n  const secondMeasure = await inviteUserTest.fillInviteFormByCAMeasureTime(\n    config.emailUseForTest,\n    config.projManager\n  );\n  await inviteUserTest.checkCreateNewUser(config.emailUseForTest);\n  inviteUserMeasure['Time metrics for invite user by CA'] = {\n    ...firstMeasure,\n    ...secondMeasure,\n  };\n  saveMetrics(\n    config.metricsFilePath,\n    config.metricfileName,\n    inviteUserMeasure\n  );\n} catch (error) {\n  await makeScreenshot(driverChrome, 'user_create_by_CA');\n  throw error;\n}",
+              "err": {},
+              "uuid": "c90e1af4-abe1-449f-b992-10142d64cc1d",
+              "parentUUID": "4d638811-26f9-4e1c-9790-2f5dbd62dbb0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "remove user by the company admin",
+              "fullTitle": "Invite and remove user by the Company Admin and measure metrics remove user by the company admin",
+              "timedOut": false,
+              "duration": 5829,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst removeUserTest = new RemoveUser(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.emailCA);\nawait logginPageTest.fillPasswordInput(config.passwordCA);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.mainCompanyPage);\ntry {\n  await removeUserTest.goToUserList('ca');\n  await removeUserTest.findUser(\n    config.emailUseForTest,\n    config.mainCompanyUsersPage\n  );\n  await removeUserTest.removefindUser();\n  await removeUserTest.checkIfUserRemove(\n    config.emailUseForTest,\n    config.mainCompanyUsersPage\n  );\n} catch (error) {\n  await makeScreenshot(driverChrome, 'user_remove_by_CA');\n  throw error;\n}",
+              "err": {},
+              "uuid": "7c72b311-9625-4eb1-a1db-c51e81642c1e",
+              "parentUUID": "4d638811-26f9-4e1c-9790-2f5dbd62dbb0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c90e1af4-abe1-449f-b992-10142d64cc1d",
+            "7c72b311-9625-4eb1-a1db-c51e81642c1e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 18709,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 0
+        },
+        {
+          "uuid": "de246087-e5a9-4fc0-9003-f16290760282",
+          "title": "measuring time metrics for PM",
+          "fullFile": "C:\\terenbro\\colorjobMETRICS\\test\\workInViewTabPM.test.js",
+          "file": "\\test\\workInViewTabPM.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"measuring time metrics for PM\"",
+              "fullTitle": "measuring time metrics for PM \"before each\" hook in \"measuring time metrics for PM\"",
+              "timedOut": false,
+              "duration": 1241,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driverChrome = await createWebdriverChrom();",
+              "err": {},
+              "uuid": "4dc944a7-2f42-4eca-80c9-332a30e7e8bc",
+              "parentUUID": "de246087-e5a9-4fc0-9003-f16290760282",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"measuring time metrics for PM\"",
+              "fullTitle": "measuring time metrics for PM \"after each\" hook in \"measuring time metrics for PM\"",
+              "timedOut": false,
+              "duration": 94,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (driverChrome) {\n  await driverChrome.quit();\n}",
+              "err": {},
+              "uuid": "89bc180a-921a-499f-a307-0ac07b17a2cf",
+              "parentUUID": "de246087-e5a9-4fc0-9003-f16290760282",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Measure time needed to create unique room, template room, unit and duplicate unit by PM",
+              "fullTitle": "measuring time metrics for PM Measure time needed to create unique room, template room, unit and duplicate unit by PM",
+              "timedOut": false,
+              "duration": 37228,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst createUnit = new CreateUnit(driverChrome);\nconst createRoom = new CreateRoom(driverChrome);\nconst roomTemplate = new RoomTemplate(driverChrome);\nconst duplicateUnit = new DuplicateUnit(driverChrome);\nconst deleteRoom = new DeleteRoom(driverChrome);\nconst deleteUnit = new DeleteUnit(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.emailPM);\nawait logginPageTest.fillPasswordInput(config.passwordPM);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.mainCompanyPage);\ntry {\n  const firstMeasure = await createUnit.goToViewAndCheckMetrics(config.projectNameMain, config.projManager);\n  const secondMeasure = await createRoom.createRoomMeasureMetrics('_', newRoomName, config.newAreaNamePM);\n  await createRoom.checkCreateNewRoom(newRoomName);\n  const thirdMeasure = await createRoom.openCtreateRoomFormViaTemplateMeasureMetrics('_', config.templateRoomPM);\n  const fourthMeasure = await roomTemplate.openEditTemplateFormMeasureMetrics('_', config.templateRoomPM);\n  const fifthMeasure = await createUnit.createUnitAndCheckMetrics(config.unitNamePM);\n  await createUnit.checkCreateUnit(config.unitNamePM);\n  const sixthMeasure = await duplicateUnit.duplicateUnitMeasureMetric();\n  PMManagerMeasure['Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'] =\n  {\n    ...firstMeasure,\n    ...secondMeasure,\n    ...thirdMeasure,\n    ...fourthMeasure,\n    ...fifthMeasure,\n    ...sixthMeasure\n  };\n  saveMetrics(config.metricsFilePath, config.metricfileName, PMManagerMeasure);\n  console.log(PMManagerMeasure, 'createProjectManagerMesuer');\n  await deleteUnit.deleteUnit(config.duplicateUnitNamePM);\n  await deleteUnit.checkDeleteUnit(config.duplicateUnitNamePM);\n  await deleteUnit.deleteUnit(config.unitNamePM);\n  await deleteUnit.checkDeleteUnit(config.unitNamePM);\n  await deleteRoom.deleteRoom(newRoomName);\n  await deleteRoom.checkDeleteFloor(newRoomName);\n} catch (error) {\n  await makeScreenshot(driverChrome, 'unit_create');\n  throw error;\n}",
+              "err": {},
+              "uuid": "4fbee05d-50d9-4f67-965d-7805c15b2ddc",
+              "parentUUID": "de246087-e5a9-4fc0-9003-f16290760282",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "PM creates the task on Tasks tab within the Project and measure metrics",
+              "fullTitle": "measuring time metrics for PM PM creates the task on Tasks tab within the Project and measure metrics",
+              "timedOut": false,
+              "duration": 20797,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst createTask = new CreateTask(driverChrome);\nconst filterTask = new FilterTaskByStatus(driverChrome);\nconst removeTask = new RemoveTask(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.emailPM);\nawait logginPageTest.fillPasswordInput(config.passwordPM);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.mainCompanyPage);\ntry {\n  await createTask.goToView(config.projectNameMain, 'pm');\n  await createTask.goToSelektTab('Tasks');\n  const firstMeasure = await createTask.fillCreateTaskMeasureMetrics(\n    config.newFirstTaskNamePM,\n    config.newTaskDescriptionPM,\n    config.newTaskDueDataPM\n  );\n  const secondMeasure = await createTask.clickHideBtnAndMeasureMetrics();\n  const thirdMeasure = await filterTask.filterTasksByStatusMeasureMetrics(\n    'done'\n  );\n  PMManagerMeasure['Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'] = {\n    ...PMManagerMeasure['Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'],\n    ...firstMeasure,\n    ...secondMeasure,\n    ...thirdMeasure,\n  };\n  await removeTask.taskRemove(config.newFirstTaskNamePM);\n  // console.log(firstMesure, 'firstMesure', secondMesure, 'secondMesure', thirdMesure, 'thirdMesure');\n  console.log(PMManagerMeasure, 'createTaskManagerMeasure');\n  saveMetrics(\n    config.metricsFilePath,\n    config.metricfileName,\n    PMManagerMeasure\n  );\n} catch (error) {\n  await makeScreenshot(driverChrome, 'task_create');\n  throw error;\n}",
+              "err": {},
+              "uuid": "6c6d01a6-cf3b-485e-8cd9-037ef75f3257",
+              "parentUUID": "de246087-e5a9-4fc0-9003-f16290760282",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4fbee05d-50d9-4f67-965d-7805c15b2ddc",
+            "6c6d01a6-cf3b-485e-8cd9-037ef75f3257"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 58025,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 0
+        },
+        {
+          "uuid": "9e3b58f2-e8a4-4283-a1c9-c13b1f335b75",
+          "title": "Change task status by SU and measure metrics",
+          "fullFile": "C:\\terenbro\\colorjobMETRICS\\test\\workInViewTabSU.test.js",
+          "file": "\\test\\workInViewTabSU.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Change task status by SU and measure metrics\"",
+              "fullTitle": "Change task status by SU and measure metrics \"before each\" hook in \"Change task status by SU and measure metrics\"",
+              "timedOut": false,
+              "duration": 1176,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driverChrome = await createWebdriverChrom();",
+              "err": {},
+              "uuid": "2e63ea62-309d-4d62-aac0-e1d18cf97eb1",
+              "parentUUID": "9e3b58f2-e8a4-4283-a1c9-c13b1f335b75",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"Change task status by SU and measure metrics\"",
+              "fullTitle": "Change task status by SU and measure metrics \"after each\" hook in \"Change task status by SU and measure metrics\"",
+              "timedOut": false,
+              "duration": 103,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (driverChrome) {\n  await driverChrome.quit();\n}",
+              "err": {},
+              "uuid": "40478b0a-fa6f-43e2-9729-21de4e413251",
+              "parentUUID": "9e3b58f2-e8a4-4283-a1c9-c13b1f335b75",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "change task status by SU",
+              "fullTitle": "Change task status by SU and measure metrics change task status by SU",
+              "timedOut": false,
+              "duration": 28015,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// time and site or lochalhost there tests are going\nconsole.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);\nconst logginPageTest = new LoginPage(driverChrome, config.urlLoginPage);\nconst changeAreaStatus = new ChangeAreaStatusInProjectProgress(driverChrome);\nconst weightChange = new WeightChange(driverChrome);\nconst addCommentToArea = new AddCommentToArea(driverChrome);\nawait logginPageTest.openLoginForm();\nawait logginPageTest.fillEmailInput(config.emailSU);\nawait logginPageTest.fillPasswordInput(config.passwordSU);\nawait logginPageTest.checkSaveForFuture();\nawait logginPageTest.login(config.mainCompanyPage);\ntry {\n//   await changeTaskStatus.goToTasksList(config.projectNameMain);\n  \n  await changeAreaStatus.goToView(config.projectNameMain, 'su'); \n  await changeAreaStatus.goToSelektTab(config.projectProgress); \n  const firstMeasure =  await changeAreaStatus.findeAreaStatusClickAndMeasureMetric();\n  const secondMeasure = await changeAreaStatus.changeStatusToDoOnInProgressMeasureMetrics();\n  const thirdMeasure = await weightChange.findeWeightAndChangeItMeasureMetrics(config.large);\n  const fourthMeasure = await addCommentToArea.addCommentMeasureMetrics(config.commentsSU);\n  await addCommentToArea.deleteComment(config.commentsSU);\n  await weightChange.findeWeightAndChangeIt(config.medium);\n  await changeAreaStatus.changeStatusInProgressOnToDo();\n \n  SUManagerMeasure['Time metrics for change area status, weight and add comments by PM']=\n  {\n    ...firstMeasure,\n    ...secondMeasure,\n    ...thirdMeasure,\n    ...fourthMeasure\n  }\n  saveMetrics(config.metricsFilePath, config.metricfileName,SUManagerMeasure)\n  await driverChrome.sleep(1000);\n \n} catch (error) {\n  await makeScreenshot(driverChrome, 'task_change_status');\n  throw error;\n}",
+              "err": {},
+              "uuid": "f6435dcc-ea0e-4e60-ab88-7b6f62326ff7",
+              "parentUUID": "9e3b58f2-e8a4-4283-a1c9-c13b1f335b75",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f6435dcc-ea0e-4e60-ab88-7b6f62326ff7"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 28015,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 0
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 0
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "reports",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "colorjob",
+        "reportFilename": "reports"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

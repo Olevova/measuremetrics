@@ -1,0 +1,40 @@
+version: '3.9'
+
+name: colorjob
+services:
+  mysql:
+    image: denisdetkov/manual-testing-db:latest
+    container_name: mysql-container-cj
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - my-network
+
+  backend:
+    image: denisdetkov/manual-testing-colorjob-backend:latest
+    container_name: backend-cj
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mysql
+    ports:
+      - "8090:8080"
+    networks:
+      - my-network
+
+  frontend:
+    image: denisdetkov/manual-testing-colorjob-frontend:latest
+    container_name: frontend-cj
+    environment:
+      - SCRIPT_NAME=startDocker
+    ports:
+       - "4400:4200"
+    networks:
+      - my-network
+
+volumes:
+  mysql-data:
+
+networks:
+  my-network:
+    driver: bridge
