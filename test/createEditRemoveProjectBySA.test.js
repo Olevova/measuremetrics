@@ -82,7 +82,7 @@ describe('Create, edit and remove project by the SA and measure metrics', async 
           createProjectMesuer
       );
 
-      console.log(createProjectMesuer);
+      // console.log(createProjectMesuer);
     } catch (error) {
       await makeScreenshot(driverChrome, 'project_create');
       throw error;

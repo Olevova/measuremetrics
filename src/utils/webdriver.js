@@ -10,7 +10,7 @@ async function createWebdriverChrom() {
 
   let driver = await new Builder()
     .forBrowser('chrome')
-    // .usingServer("http://selenium-hub:4444/wd/hub")
+    .usingServer("http://selenium-hub:4444/wd/hub")
     .setChromeOptions(options)
     .build();
 

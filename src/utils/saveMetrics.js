@@ -8,7 +8,7 @@ function saveMetrics(metricsFilePath, fileName, metrics){
     if (fs.existsSync(filePath)) {
         try {
           currentData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-          console.log(currentData);
+          // console.log(currentData);
         } catch (err) {
           console.error('Error parsing JSON file:', err);
         }
@@ -25,7 +25,7 @@ function saveMetrics(metricsFilePath, fileName, metrics){
 
       fs.writeFileSync(filePath, JSON.stringify(currentData, null, 2));
 
-      console.log(metrics);
+      // console.log(metrics);
     } 
 
     module.exports  = { saveMetrics }

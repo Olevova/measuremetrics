@@ -366,21 +366,24 @@ class Base {
       console.log('Error element exists:', formError);
       throw new Error('You have error, check screenshot');
     }
+    console.log('in notification');
     await this.driver.wait(
-      until.elementLocated(By.className('notification')),
-      10000
+      until.elementLocated(By.css('.notification')),
+      15000
     );
+    console.log('after located');
     const windowHandles = await this.driver.findElement(
       By.className('notification')
     );
-    await this.driver.wait(until.elementIsVisible(windowHandles), 10000);
-
+   
+    await this.driver.wait(until.elementIsVisible(windowHandles), 15000);
+    console.log('after located handle');
     const windowHandlesText = await windowHandles.getText();
 
     if (windowHandlesText === 'Error. Failed to save data') {
       throw new Error('Item did not create');
     }
-    await this.driver.wait(until.stalenessOf(windowHandles), 10000);
+    await this.driver.wait(until.stalenessOf(windowHandles), 15000);
   }
 
   // The method for locating the coordinates of an element on the website

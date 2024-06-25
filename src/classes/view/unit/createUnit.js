@@ -103,6 +103,7 @@ async createUnitAndCheckMetrics(unit) {
 
   async checkCreateUnit(unit) {
     await this.driver.sleep(1000);
+    await this.waitListDate('app-unit-block',2)
     await this.checkCreateItem('.unit-name-wrapper p', unit);
   }
 }
