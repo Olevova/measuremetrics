@@ -1,8 +1,6 @@
 const { By, until } = require('selenium-webdriver');
 const path = require('path');
 
-
-
 class Base {
   // The method used for finding values in dropdown menus in forms.
   async findDateInDropDown(array, text) {
@@ -20,7 +18,11 @@ class Base {
     throw Error(`No ${text} in options list`);
   }
 
-  async numberOfItemsInTheList(locator, number='100', listLocator = '.company-name' ) {
+  async numberOfItemsInTheList(
+    locator,
+    number = '100',
+    listLocator = '.company-name'
+  ) {
     await this.driver.executeScript('return document.readyState');
     await this.driver.wait(until.elementsLocated(By.css(locator)), 10000);
 
@@ -43,14 +45,14 @@ class Base {
     // console.log(await listOfItem.length, "list len");
     if ((await listOfItem.length) >= 20) {
       const noPagination = await this.driver
-      .wait(until.elementLocated(By.id('selectAmountItems')), 3000)
-      .catch(() => null);
+        .wait(until.elementLocated(By.id('selectAmountItems')), 3000)
+        .catch(() => null);
 
-    if (noPagination === null) {
-      const emptyList = 20;
-      return emptyList;
-    }
-    const paginationDropDown = await this.driver.findElement(
+      if (noPagination === null) {
+        const emptyList = 20;
+        return emptyList;
+      }
+      const paginationDropDown = await this.driver.findElement(
         By.id('selectAmountItems')
       );
 
@@ -72,11 +74,12 @@ class Base {
       await this.waitListDate(listLocator, 21);
       const dataInList = await this.driver.findElements(By.css(listLocator));
       // console.log(len, await dataInList.length , 'lenght');
-      if(len === await dataInList.length){
+      if (len === (await dataInList.length)) {
         return len;
-      }
-      else {
-        throw new Error(`The number of items in the list does not match the number of items in the counter`);
+      } else {
+        throw new Error(
+          `The number of items in the list does not match the number of items in the counter`
+        );
       }
     }
     len = await listOfItem.length;
@@ -187,16 +190,18 @@ class Base {
     );
     const listItem = await this.driver.findElements(By.css('.company-name'));
     let firstProjectLink;
-    if(await listItem.length >= 20){
-      const pagination = await this.driver.wait(until.elementLocated(By.id('paginationWrapper')),3000);
-      if(pagination){
+    if ((await listItem.length) >= 20) {
+      const pagination = await this.driver.wait(
+        until.elementLocated(By.id('paginationWrapper')),
+        3000
+      );
+      if (pagination) {
         await this.selectNumberOfItemsPerPagination('100');
       }
       firstProjectLink = await this.driver.findElements(
         By.css('.company-name')
       );
-    }else
-    {
+    } else {
       firstProjectLink = await this.driver.findElements(
         By.css('.company-name')
       );
@@ -204,25 +209,57 @@ class Base {
     if (project) {
       await this.findAndClickOnLinkInTheList(project, '.company-name');
       startTime = performance.now();
-      await this.driver.wait(until.elementLocated(By.css('.floors-wrapper')),10000)
-      await this.driver.wait(until.elementIsVisible(this.driver.findElement(By.css('.floors-wrapper'))), 10000);
-      await this.driver.wait(until.elementLocated(By.css('#unitListId')),10000)
-      await this.driver.wait(until.elementIsVisible(this.driver.findElement(By.css('#unitListId'))), 10000);
+      await this.driver.wait(
+        until.elementLocated(By.css('.floors-wrapper')),
+        10000
+      );
+      await this.driver.wait(
+        until.elementIsVisible(
+          this.driver.findElement(By.css('.floors-wrapper'))
+        ),
+        10000
+      );
+      await this.driver.wait(
+        until.elementLocated(By.css('#unitListId')),
+        10000
+      );
+      await this.driver.wait(
+        until.elementIsVisible(this.driver.findElement(By.css('#unitListId'))),
+        10000
+      );
       endTime = performance.now();
-      projectDetailsPageOpen = endTime - startTime
+      projectDetailsPageOpen = endTime - startTime;
       console.log(projectDetailsPageOpen);
-      return {'time to open project page': +projectDetailsPageOpen.toFixed(2)}
+      return {
+        'time to open project page': +projectDetailsPageOpen.toFixed(2),
+      };
     } else {
       await firstProjectLink[0].click();
       startTime = performance.now();
-      await this.driver.wait(until.elementLocated(By.css('.floors-wrapper')),10000)
-      await this.driver.wait(until.elementIsVisible(this.driver.findElement(By.css('.floors-wrapper'))), 10000);
-      await this.driver.wait(until.elementLocated(By.css('#unitListId')),10000)
-      await this.driver.wait(until.elementIsVisible(this.driver.findElement(By.css('#unitListId'))), 10000);
+      await this.driver.wait(
+        until.elementLocated(By.css('.floors-wrapper')),
+        10000
+      );
+      await this.driver.wait(
+        until.elementIsVisible(
+          this.driver.findElement(By.css('.floors-wrapper'))
+        ),
+        10000
+      );
+      await this.driver.wait(
+        until.elementLocated(By.css('#unitListId')),
+        10000
+      );
+      await this.driver.wait(
+        until.elementIsVisible(this.driver.findElement(By.css('#unitListId'))),
+        10000
+      );
       endTime = performance.now();
-      projectDetailsPageOpen = endTime - startTime
+      projectDetailsPageOpen = endTime - startTime;
       console.log(projectDetailsPageOpen);
-      return {'time to open project page': +projectDetailsPageOpen.toFixed(2)}
+      return {
+        'time to open project page': +projectDetailsPageOpen.toFixed(2),
+      };
       // await this.driver.sleep(1000);
     }
   }
@@ -260,21 +297,24 @@ class Base {
     );
     const listItem = await this.driver.findElements(By.css('.company-name'));
     let firstProjectLink;
-    if(await listItem.length >= 20){
-      const pagination = await this.driver.wait(until.elementLocated(By.id('paginationWrapper')),3000);
-      if(pagination){
+    if ((await listItem.length) >= 20) {
+      const pagination = await this.driver.wait(
+        until.elementLocated(By.id('paginationWrapper')),
+        3000
+      );
+      if (pagination) {
         await this.selectNumberOfItemsPerPagination('100');
       }
       firstProjectLink = await this.driver.findElements(
         By.css('.company-name')
       );
-    }else
-    {
+    } else {
       firstProjectLink = await this.driver.findElements(
         By.css('.company-name')
       );
     }
     if (project) {
+      await this.waitListDate('.company-name', 1);
       await this.findAndClickOnLinkInTheList(project, '.company-name');
       await this.driver.sleep(1000);
     } else {
@@ -354,8 +394,10 @@ class Base {
     locator = 'className',
     selector = 'small-error-text-field'
   ) {
+    const startTime = Date.now();
+    console.log('Start time:', startTime);
     const formError = await this.driver
-      .wait(until.elementLocated(By[locator](selector)), 500)
+      .wait(until.elementLocated(By[locator](selector)), 200)
       .catch(() => null);
     if (formError) {
       console.log(
@@ -366,16 +408,23 @@ class Base {
       console.log('Error element exists:', formError);
       throw new Error('You have error, check screenshot');
     }
-    console.log('in notification');
+    console.log('in notification new');
+    const preWaitTime = Date.now();
+    console.log(
+      'Time before waiting for notification:',
+      preWaitTime - startTime
+    );
+    // await this.driver.wait(until.elementLocated(By.css('app-notification')),10000);
+    // await this.driver.wait(until.``)
     await this.driver.wait(
-      until.elementLocated(By.css('.notification')),
+      until.elementLocated(By.className('notification')),
       15000
     );
-    console.log('after located');
+    console.log('after located new');
     const windowHandles = await this.driver.findElement(
       By.className('notification')
     );
-   
+
     await this.driver.wait(until.elementIsVisible(windowHandles), 15000);
     console.log('after located handle');
     const windowHandlesText = await windowHandles.getText();
@@ -397,9 +446,10 @@ class Base {
   // The method for checking the status of an array
   async checkAreaStatus(status) {
     const newSelectStatus = await this.driver.findElement(
-      By.id('areaStatusSelect')
+      By.css('.area__status-btn')
     );
-    if ((await newSelectStatus.getAttribute('value')) == !status) {
+    const areaStatus = await newSelectStatus.getText();
+    if ((await areaStatus.trim()) == !status) {
       throw new Error(
         `The area's status does not match the specified status of ${status}`
       );
@@ -407,6 +457,15 @@ class Base {
     console.log(` All ok status is ${status}`);
   }
 
+  // The method for click on the status dropdown in area Pop-up
+  async clickAreaStatusDropdown() {
+    const inputEl = this.driver.findElement(
+      By.className('area__status-icon-dropdown')
+    );
+    await this.driver.wait(until.elementIsEnabled(inputEl), 10000);
+    await inputEl.click();
+    await this.waitListDate('.area__status-menu__item', 1);
+  }
   // The method for finding a link in a list and clicking on it
   async findAndClickOnLinkInTheList(link, selector) {
     const listOfLink = await this.driver.findElements(By.css(selector));

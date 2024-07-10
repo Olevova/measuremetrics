@@ -27,6 +27,8 @@ class WeightChange extends Base {
     showWeightDropdown = endTime - startTime;
     startTime = performance.now();
     await this.findDateInDropDown(await weightList, weight);
+    // await this.driver.wait(until.elementLocated(By.css('app-notification')),10000);
+    // await this.driver.wait(until.elementLocated(By.css('.notification')),10000);
     await this.notificationCheck();
     endTime = performance.now();
     saveWeightTime = endTime - startTime;
@@ -47,7 +49,8 @@ class WeightChange extends Base {
       By.css('.ng-option[role="option"]')
     );
     await this.findDateInDropDown(await weightList, weight);
-    await this.notificationCheck();
+    await this.driver.wait(until.elementLocated(By.css('app-notification')),10000);
+   
     
   }
 

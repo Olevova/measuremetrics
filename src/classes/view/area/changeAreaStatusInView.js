@@ -15,17 +15,21 @@ async changeStatusToDoOnInProgressMeasureMetrics() {
   let endTime;
   let dropDownShowTime;
   let savedStatusTime;
-  const inputEl = this.driver.findElement(By.className('ng-input'));
+  
+  const inputEl = this.driver.findElement(By.className('area__status-icon-dropdown'));
   await this.driver.wait(until.elementIsEnabled(inputEl), 10000);
   startTime = performance.now();
   await inputEl.click();
-  await this.waitListDate('.ng-option-label', 1);
-  const statusElements = this.driver.findElements(By.css('.ng-option-label'));
+  await this.waitListDate('.area__status-menu__item', 1);
+  const statusElements =await this.driver.findElements(By.css('.area__status-menu__item'));
   endTime = performance.now();
   dropDownShowTime = endTime - startTime;
   startTime = performance.now();
   await this.findDateInDropDown(await statusElements, 'In Progress');
-  await this.notificationCheck();
+  await this.notificationCheck()
+  // await this.driver.wait(until.elementLocated(By.css('app-notification')),10000);
+  // await this.driver.wait(until.elementLocated(By.css('.notification')),10000);
+  // await this.notificationCheck();
   await this.checkAreaStatus('IN_PROGRESS');
   endTime = performance.now();
   savedStatusTime = endTime - startTime;
@@ -36,6 +40,7 @@ async changeStatusToDoOnInProgressMeasureMetrics() {
     throw new Error('Progress Status Procent must be 0%');
   }
   console.log(await statusProgressProcent.getText());
+  
   return{
     'dropdown show statuses time': +dropDownShowTime.toFixed(2),
     'saved new areas status time': +savedStatusTime.toFixed(2)
@@ -192,16 +197,15 @@ async changeStatusToDoOnInProgressMeasureMetrics() {
 
   async changeStatusInProgressOnToDo() {
     const selectStatus = await this.driver.findElement(
-      By.id('areaStatusSelect')
+      By.css('.area__status-btn')
     );
     console.log(await selectStatus.getAttribute('value'));
-    const inputEl = this.driver.findElement(By.className('ng-input'));
-    await this.driver.wait(until.elementIsEnabled(inputEl), 10000);
-    await inputEl.click();
-    await this.waitListDate('.ng-option-label', 1);
-    const statusElements = this.driver.findElements(By.css('.ng-option-label'));
+    await this.clickAreaStatusDropdown()
+    const statusElements = this.driver.findElements(By.css('.area__status-menu__item'));
     await this.findDateInDropDown(await statusElements, 'To Do');
-    await this.notificationCheck();
+    // await this.notificationCheck();
+    await this.driver.wait(until.elementLocated(By.css('app-notification')),10000);
+    // await this.driver.wait(until.elementLocated(By.css('.notification')),10000);
     await this.checkAreaStatus('TO_DO');
   }
 

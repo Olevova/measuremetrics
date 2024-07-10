@@ -17,6 +17,7 @@ class ChangeAreaStatusInProjectProgress extends ChangeAreaStatus{
         let endTime;
         let openAreaDetailPopUp;
         let waitForArea
+
         startTime = performance.now();
         await this.driver.wait(until.elementLocated(By.css('html')), 10000);
         await this.driver.executeScript('return document.readyState');
@@ -28,13 +29,29 @@ class ChangeAreaStatusInProjectProgress extends ChangeAreaStatus{
     
         startTime = performance.now();
         await areaElement.click();
-        
-        await this.driver.wait(until.elementLocated(By.id('areaStatusSelect')), 10000);
-        const selectStatusMenu = await this.driver.findElement(By.id('areaStatusSelect'));
+        // const nextPaintPromise = this.driver.executeAsyncScript(`
+        //     const callback = arguments[arguments.length - 1];
+        //     const observer = new PerformanceObserver((list) => {
+        //         const entries = list.getEntries();
+        //         const lastEntry = entries[entries.length - 1];
+        //         observer.disconnect();
+        //         callback(lastEntry.startTime);
+        //     });
+        //     observer.observe({ entryTypes: ['paint'] });
+        //     requestAnimationFrame(() => {
+        //         requestAnimationFrame(() => {});
+        //     });
+        // `);
+
+        await this.driver.wait(until.elementLocated(By.css('.area__status-btn')), 10000);
+        const selectStatusMenu = await this.driver.findElement(By.css('.area__status-btn'));
         await this.driver.wait(until.elementIsEnabled(selectStatusMenu),10000);
         endTime = performance.now();
         openAreaDetailPopUp = endTime - startTime;
         await this.driver.sleep(1000);
+        // const { startTime: browserStartTime, inpEndTime } = await nextPaintPromise;
+        // const inp = inpEndTime - browserStartTime;
+        // console.log(inp, "inp");
         return {
             'Open area ditails Pop Up time': +openAreaDetailPopUp.toFixed(2),
             'Time areas appear on the "Project Progress" tab': +waitForArea.toFixed(2)

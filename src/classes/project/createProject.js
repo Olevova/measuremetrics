@@ -172,6 +172,9 @@ class CreateProject extends Base {
     console.log(`Close form time: ${formCloseTime} ms`);
     await this.waitListDate('.list-name-wrapper', 1);
     await this.checkCreateItem('.list-name-wrapper', name);
+    const projects = await this.driver.findElements(By.css('.list-name-wrapper'));
+    const firstProject = await projects[0]
+    await this.driver.wait(until.elementIsEnabled(firstProject),10000);
     endTime = performance.now();
     projectAppearTime = endTime - startTime
    

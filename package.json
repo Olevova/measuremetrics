@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "import-tests": "set TESTOMATIO=tstmt_hPNdb80OrOnIZL94TWhW15LtzsXiprUlVw1719249035&& npx check-tests@latest Mocha \"**/*{.,_}{test,spec,cy}.js\"",
     "test": "DEBUG=testomatio:* TESTOMATIO=tstmt_hPNdb80OrOnIZL94TWhW15LtzsXiprUlVw1719249035 npx mocha --no-timeouts -R ./node_modules/@testomatio/reporter/lib/adapter/mocha.js",
-    "testw": "set DEBUG=testomatio:* && set TESTOMATIO=tstmt_C5vBFRub72c_muiqpdBcAnhlnuW47aHfyw1718280379&& npx mocha --no-timeouts -R ./node_modules/@testomatio/reporter/lib/adapter/mocha.js",
+    "test1": "set DEBUG=testomatio:* && set TESTOMATIO=tstmt_C5vBFRub72c_muiqpdBcAnhlnuW47aHfyw1718280379&& npx mocha --no-timeouts -R ./node_modules/@testomatio/reporter/lib/adapter/mocha.js",
     "test2": "mocha --no-timeouts --reporter mochawesome --require mochawesome/register --reporter-options  reportDir=colorjob,reportFilename=reports ",
-
     "onetest": "mocha --no-timeouts --reporter mochawesome --require mochawesome/register --reporter-options reportDir=colorjob,reportFilename=reports test/workInViewTabSU.test.js",
     "testp": "mocha --no-timeouts --parallel --reporter mochawesome --require mochawesome/register --reporter-options reportDir=colorjob,reportFilename=reports-parallel  test/parallel",
     "testComb": "npm run test2 && npm run testp"
@@ -24,7 +24,8 @@
     "nanoid": "^3.0.0",
     "node-imap": "^0.9.6",
     "puppeteer": "^21.4.0",
-    "selenium-webdriver": "^4.18.1"
+    "selenium-webdriver": "^4.18.1",
+    "web-vitals": "^4.2.1"
   },
   "devDependencies": {
     "@testomatio/reporter": "^1.4.4"

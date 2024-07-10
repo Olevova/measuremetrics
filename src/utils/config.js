@@ -24,7 +24,7 @@ module.exports = {
     //company name for test creation the project by SA
     companyName: 'TSTPerformance',
     //main test project
-    projectNameMain: 'Perfomence',
+    projectNameMain: 'Performance',
     //test project for PM 
     projectForPM: 'PerfomancePM',
     unitNamePM: 'testUnit',
@@ -60,6 +60,7 @@ module.exports = {
     projects: 'Projects',
     // metrics test 
     metricsFilePath:'src/utils/metrics/',
-    metricfileName: 'metrics.json'
+    metricfileNameChrom: 'metricsChrom.json',
+    metricfileNameSafari: 'metricsSafari.json',
 
   };

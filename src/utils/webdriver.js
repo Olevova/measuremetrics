@@ -1,22 +1,28 @@
-const { Builder, Key } = require('selenium-webdriver');
-const chrom = require('selenium-webdriver/chrome');
+const { Builder } = require('selenium-webdriver');
+const ltCapabilite = require('../../capabilities');
 
-async function createWebdriverChrom() {
-  const options = new chrom.Options();
-  options.addArguments('--incognito');
-  options.addArguments('--start-maximized');
-  options.addArguments('--private');
-  // options.addArguments("--window-size=2550px,2135px");
+const browsers = [
+    { browser: "Safari", bVersion: "17", os: "macOS Sonoma" },
+    { browser: "Chrome", bVersion: "126", os: "Windows 10" }
+];
 
-  let driver = await new Builder()
-    .forBrowser('chrome')
-    .usingServer("http://selenium-hub:4444/wd/hub")
-    .setChromeOptions(options)
-    .build();
+const USERNAME = ltCapabilite.capability['LT:Options'].username;
+const KEY = ltCapabilite.capability['LT:Options'].accessKey;
+const GRID_HOST = 'hub.lambdatest.com/wd/hub';
+const gridUrl = 'https://' + USERNAME + ':' + KEY + '@' + GRID_HOST;
 
-  // await driver.manage().window().fullscreen();
+async function createDriver(browser, bVersion, os, testName){
+    ltCapabilite.capability.browserName = browser;
+    ltCapabilite.capability.browserVersion = bVersion;
+    ltCapabilite.capability['LT:Options'].platformName = os;
+    ltCapabilite.capability['LT:Options'].name = testName;
 
-  return driver;
+    const driver = await new Builder()
+        .usingServer(gridUrl)
+        .withCapabilities(ltCapabilite.capability)
+        .build();
+    return driver;
 }
 
-module.exports = { createWebdriverChrom };
+module.exports = { browsers, createDriver };
+

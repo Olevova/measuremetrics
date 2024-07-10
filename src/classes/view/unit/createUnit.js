@@ -8,7 +8,7 @@ class CreateUnit extends Base {
         until.elementLocated(
           By.css('form.form-create-unit-instead-btn[openedunit="true"]')
         ),
-        3000
+        2000
       )
       .catch(() => null);
     if (firstUnitForm !== null) {
@@ -61,7 +61,7 @@ async createUnitAndCheckMetrics(unit) {
   const unitInput = await this.driver.findElement(By.id('createUnitInput'));
   await unitInput.sendKeys(unit);
   endTime = performance.now();
-  openUnitInput = endTime-startTime;
+  openUnitInput = endTime-startTime-2000;
   startTime = performance.now()
   await this.driver.wait(until.elementLocated(By.id('createUnitBtn')), 10000);
   const submitBtn = await this.driver.findElement(By.id('createUnitBtn'));
@@ -69,7 +69,7 @@ async createUnitAndCheckMetrics(unit) {
   await submitBtn.click();
   await this.driver.sleep(1000);
   endTime = performance.now();
-  createUnit = endTime - startTime;
+  createUnit = endTime - startTime - 1000;
   return{ 
     'open UnitAdd menu time': +openUnitAddForm.toFixed(2),
     'open Unit creation form time': +openUnitInput.toFixed(2),

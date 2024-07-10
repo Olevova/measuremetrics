@@ -87,6 +87,7 @@ class RemoveTask extends Base {
     await this.driver.wait(until.elementLocated(By.css('#dotsMenu[editmenuopen]')),10000);
     const delBtn = await this.driver.findElement(By.css('#dotsMenu[editmenuopen] #deleteItem'))
     // await this.driver.wait(until.elementIsVisible(delBtn), 10000);
+    await this.driver.sleep(2000)
     await this.driver.wait(until.elementIsEnabled(delBtn), 10000);
     await delBtn.click();
 

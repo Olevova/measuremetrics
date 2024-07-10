@@ -30,7 +30,9 @@ async addCommentMeasureMetrics(comment) {
   await this.driver.wait(until.elementIsNotVisible(saveBtn),10000);
   endTime = performance.now();
   saveComments = endTime -startTime;
-  await this.notificationCheck();
+  await this.driver.wait(until.elementLocated(By.css('app-notification')),10000);
+  // await this.driver.wait(until.elementLocated(By.css('.notification')),10000);
+  // await this.notificationCheck();
   await this.driver.sleep(2000);
   return {'save area comment time': +saveComments.toFixed(2)}
 }
@@ -130,7 +132,9 @@ async addCommentMeasureMetrics(comment) {
     );
     await this.driver.wait(until.elementIsEnabled(commentMenu), 10000);
     await commentMenu.findElement(By.id('deleteUnitBtn')).click();
-    await this.notificationCheck();
+    await this.driver.wait(until.elementLocated(By.css('app-notification')),10000);
+    // await this.driver.wait(until.elementLocated(By.css('.notification')),10000);
+    // await this.notificationCheck();
   }
 }
 

@@ -18,7 +18,10 @@ const { nanoid } = require('nanoid');
 describe('measuring time metrics for PM', async () => {
   // here add parameters for creation
   let driverChrome = null;
-  let PMManagerMeasure = { 'Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM': {} };
+  let PMManagerMeasure = {
+    'Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM':
+      {},
+  };
 
   const newRoomName = 'tr' + nanoid(5);
 
@@ -51,29 +54,51 @@ describe('measuring time metrics for PM', async () => {
     await logginPageTest.login(config.mainCompanyPage);
 
     try {
-      const firstMeasure = await createUnit.goToViewAndCheckMetrics(config.projectNameMain, config.projManager);
+      const firstMeasure = await createUnit.goToViewAndCheckMetrics(
+        config.projectNameMain,
+        config.projManager
+      );
       // console.log(firstMeasure, 'firstMeasure');
-      const secondMeasure = await createRoom.createRoomMeasureMetrics('_', newRoomName, config.newAreaNamePM);
+      const secondMeasure = await createRoom.createRoomMeasureMetrics(
+        '_',
+        newRoomName,
+        config.newAreaNamePM
+      );
       // await createRoom.checkCreateNewRoom(newRoomName);
       console.log(secondMeasure, 'firstMeasure');
-      const thirdMeasure = await createRoom.openCtreateRoomFormViaTemplateMeasureMetrics('_', config.templateRoomPM);
+      const thirdMeasure =
+        await createRoom.openCtreateRoomFormViaTemplateMeasureMetrics(
+          '_',
+          config.templateRoomPM
+        );
       // console.log(thirdMeasure, 'thirdMeasure');
-      const fourthMeasure = await roomTemplate.openEditTemplateFormMeasureMetrics('_', config.templateRoomPM);
+      const fourthMeasure =
+        await roomTemplate.openEditTemplateFormMeasureMetrics(
+          '_',
+          config.templateRoomPM
+        );
       // console.log(fourthMeasure, 'fourthMeasure');
-      const fifthMeasure = await createUnit.createUnitAndCheckMetrics(config.unitNamePM);
+      const fifthMeasure = await createUnit.createUnitAndCheckMetrics(
+        config.unitNamePM
+      );
       // console.log(fifthMeasure, 'fifthMeasure');
       await createUnit.checkCreateUnit(config.unitNamePM);
       const sixthMeasure = await duplicateUnit.duplicateUnitMeasureMetric();
-      PMManagerMeasure['Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'] =
-      {
+      PMManagerMeasure[
+        'Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'
+      ] = {
         ...firstMeasure,
         ...secondMeasure,
         ...thirdMeasure,
         ...fourthMeasure,
         ...fifthMeasure,
-        ...sixthMeasure
+        ...sixthMeasure,
       };
-      saveMetrics(config.metricsFilePath, config.metricfileName, PMManagerMeasure);
+      saveMetrics(
+        config.metricsFilePath,
+        config.metricfileName,
+        PMManagerMeasure
+      );
       // console.log(PMManagerMeasure, 'createProjectManagerMesuer');
       await deleteUnit.deleteUnit(config.duplicateUnitNamePM);
       await deleteUnit.checkDeleteUnit(config.duplicateUnitNamePM);
@@ -81,7 +106,6 @@ describe('measuring time metrics for PM', async () => {
       await deleteUnit.checkDeleteUnit(config.unitNamePM);
       await deleteRoom.deleteRoom(newRoomName);
       await deleteRoom.checkDeleteFloor(newRoomName);
-
     } catch (error) {
       await makeScreenshot(driverChrome, 'unit_create');
       throw error;
@@ -115,8 +139,12 @@ describe('measuring time metrics for PM', async () => {
       const thirdMeasure = await filterTask.filterTasksByStatusMeasureMetrics(
         'done'
       );
-      PMManagerMeasure['Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'] = {
-        ...PMManagerMeasure['Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'],
+      PMManagerMeasure[
+        'Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'
+      ] = {
+        ...PMManagerMeasure[
+          'Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'
+        ],
         ...firstMeasure,
         ...secondMeasure,
         ...thirdMeasure,
