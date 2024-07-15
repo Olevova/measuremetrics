@@ -14,15 +14,13 @@ class DeleteRoom extends Base {
       if (item) {
         const roomNamePart = await item.findElement(By.css('.room-arrow-with-name-wrapper'))
         const roomForDelete = await roomNamePart.getAttribute('title');
-        console.log(roomForDelete.trim(),room, 'its here', await roomForDelete.trim() === room.trim());
+        // console.log(roomForDelete.trim(),room, 'its here', await roomForDelete.trim() === room.trim());
         // console.log(await item.getText());
         if (await roomForDelete.trim() === room.trim()) {
-          console.log("in el1");
           await this.driver.wait(
             until.elementLocated(By.css('.menu-list-dots-wrapper')),
             10000
           );
-          console.log("in el2");
           const menuBtn = await item.findElement(
             By.css('.menu-list-dots-wrapper')
           );

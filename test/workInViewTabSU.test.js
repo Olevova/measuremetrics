@@ -1,24 +1,25 @@
-const { browsers, createDriver } = require('../webdriver');
-const LoginPage = require('../../classes/auth/login');
-const ChangeAreaStatusInProjectProgress = require('../../classes/view/area/changeAreaStatusInProjectProgress');
-const WeightChange = require('../../classes/statusAndWeight/weightChange');
-const AddCommentToArea = require('../../classes/view/area/addCommentToArea');
-const { saveMetrics } = require('../saveMetrics');
-const makeScreenshot = require('../makeScreenShot');
+const { browsers, createDriver } = require('../src/utils/webdriver');
+const LoginPage = require('../src/classes/auth/login');
+const ChangeAreaStatusInProjectProgress = require('../src/classes/view/area/changeAreaStatusInProjectProgress');
+const WeightChange = require('../src/classes/statusAndWeight/weightChange');
+const AddCommentToArea = require('../src/classes/view/area/addCommentToArea');
+const { saveMetrics } = require('../src/utils/saveMetrics');
+const makeScreenshot = require('../src/utils/makeScreenShot');
 const { describe } = require('mocha');
-const config = require('../config');
+const config = require('../src/utils/config');
 
+browsers.forEach(({ browser, bVersion, os }) => {
 describe('Change task status by SU and measure metrics', async () => {
-  browsers.forEach(({ browser, bVersion, os }) => {
+  
     let driver = null;
     let SUManagerMeasure = {
       'Time metrics for change area status, weight and add comments by SU': {},
     };
 
-    let testname = `Change task status by SU and measure metrics in ${browser}`;
+    let testname = ``;
 
     beforeEach(async () => {
-      driver = await createDriver(browser, bVersion, os, testname);
+      driver = await createDriver(browser, bVersion, os);
     });
 
     afterEach(async () => {
@@ -27,7 +28,9 @@ describe('Change task status by SU and measure metrics', async () => {
       }
     });
 
-    it(`change task status by SU in the ${browser}`, async () => {
+    it(`change task status by SU in the`, async () => {
+      testname = `change task status by SU in the ${browser}`
+      await driver.executeScript(`lambda-name=${testname}`)
       // time and site or lochalhost there tests are going
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
