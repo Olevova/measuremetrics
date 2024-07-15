@@ -13,9 +13,9 @@ class DeleteRoom extends Base {
     for (let item of rooms) {
       if (item) {
         const roomForDelete = await item.getAttribute('title');
-        console.log(roomForDelete.trim(),room, 'its here');
+        console.log(roomForDelete.trim(),room, 'its here', await roomForDelete.trim() === room.trim());
         // console.log(await item.getText());
-        if (await roomForDelete.trim() === room) {
+        if (await roomForDelete.trim() === room.trim()) {
           await this.driver.wait(
             until.elementLocated(By.css('.menu-list-dots-wrapper')),
             10000
