@@ -31,7 +31,7 @@ browsers.forEach(({browser, bVersion, os}) => {
     const eneDate = '12.12.25';
 
     beforeEach(async () => {
-      testname = `Create, edit and remove project by the SA and measure metrics in the ${browser}`;
+      // testname = `Create, edit and remove project by the SA and measure metrics in the ${browser}`;
       driver = await createDriver(browser, bVersion, os, testname);
     });
 
@@ -41,7 +41,7 @@ browsers.forEach(({browser, bVersion, os}) => {
       }
     });
 
-    it('create new project', async () => {
+    it('create new project in the ${browser}', async () => {
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
@@ -94,7 +94,7 @@ browsers.forEach(({browser, bVersion, os}) => {
       }
     });
 
-    it('remove project', async () => {
+    it('remove project in the ${browser}', async () => {
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
