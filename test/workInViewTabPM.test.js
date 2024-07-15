@@ -94,11 +94,19 @@ describe('measuring time metrics for PM', async () => {
           ...fifthMeasure,
           ...sixthMeasure,
         };
-        saveMetrics(
-          config.metricsFilePath,
-          config.metricfileName,
-          PMManagerMeasure
-        );
+        if (browser === 'Safari') {
+          saveMetrics(
+            config.metricsFilePath,
+            config.metricfileNameSafari,
+            PMManagerMeasure
+          );
+        } else {
+          saveMetrics(
+            config.metricsFilePath,
+            config.metricfileNameChrom,
+            PMManagerMeasure
+          );
+        }
         await deleteUnit.deleteUnit(config.duplicateUnitNamePM);
         await deleteUnit.checkDeleteUnit(config.duplicateUnitNamePM);
         await deleteUnit.deleteUnit(config.unitNamePM);
