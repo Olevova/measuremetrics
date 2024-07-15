@@ -14,7 +14,7 @@ describe('Invite and remove user by the Company Admin and measure metrics', asyn
 
     let driver = null;
     let inviteUserMeasure = { 'Time metrics for invite user by CA': {} };
-    let testname = ``
+    let testname = ``;
 
     beforeEach(async () => {
       driver = await createDriver(browser, bVersion, os);

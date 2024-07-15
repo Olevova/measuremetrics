@@ -1,32 +1,34 @@
-const { browsers, createDriver } = require('../webdriver');
-const LoginPage = require('../../classes/auth/login');
-const CreateUnit = require('../../classes/view/unit/createUnit');
-const DeleteUnit = require('../../classes/view/unit/deleteUnit');
-const CreateRoom = require('../../classes/view/room/createRoom');
-const DeleteRoom = require('../../classes/view/room/deleteRoom');
-const RoomTemplate = require('../../classes/view/room/roomTemplate');
-const DuplicateUnit = require('../../classes/view/unit/duplicateUnit');
-const CreateTask = require('../../classes/task/createTask');
-const FilterTaskByStatus = require('../../classes/task/filterTaskByStatus');
-const RemoveTask = require('../../classes/task/removeTask');
-const { saveMetrics } = require('../saveMetrics');
-const makeScreenshot = require('../makeScreenShot');
+const { browsers, createDriver } = require('../src/utils/webdriver');
+const LoginPage = require('../src/classes/auth/login');
+const CreateUnit = require('../src/classes/view/unit/createUnit');
+const DeleteUnit = require('../src/classes/view/unit/deleteUnit');
+const CreateRoom = require('../src/classes/view/room/createRoom');
+const DeleteRoom = require('../src/classes/view/room/deleteRoom');
+const RoomTemplate = require('../src/classes/view/room/roomTemplate');
+const DuplicateUnit = require('../src/classes/view/unit/duplicateUnit');
+const CreateTask = require('../src/classes/task/createTask');
+const FilterTaskByStatus = require('../src/classes/task/filterTaskByStatus');
+const RemoveTask = require('../src/classes/task/removeTask');
+const { saveMetrics } = require('../src/utils/saveMetrics');
+const makeScreenshot = require('../src/utils/makeScreenShot');
 const { describe } = require('mocha');
-const config = require('../config');
+const config = require('../src/utils/config');
 const { nanoid } = require('nanoid');
 
+browsers.forEach(({ browser, bVersion, os }) => {
 describe('measuring time metrics for PM', async () => {
-  browsers.forEach(({ browser, bVersion, os }) => {
+  
     let driver = null;
+    let testname = ``
     let PMManagerMeasure = {
       'Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM':
         {},
     };
-    let testname = `measuring time metrics for PM ${browser}`;
+    
     const newRoomName = 'tr' + nanoid(5);
 
     beforeEach(async () => {
-      driver = await createDriver(browser, bVersion, os, testname);
+      driver = await createDriver(browser, bVersion, os);
     });
 
     afterEach(async () => {
@@ -37,6 +39,9 @@ describe('measuring time metrics for PM', async () => {
 
     it('Measure time needed to create unique room, template room, unit and duplicate unit by PM', async () => {
       // time and site or lochalhost there tests are going
+      testname = `Measure time needed to create unique room, template room, unit and duplicate unit by PM in the ${browser}`
+      await driver.executeScript(`lambda-name=${testname}`);
+      
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
@@ -124,6 +129,8 @@ describe('measuring time metrics for PM', async () => {
 
     it('PM creates the task on Tasks tab within the Project and measure metrics', async () => {
       // time and site or lochalhost there tests are going
+      testname = `PM creates the task on Tasks tab within the Project and measure metrics in the ${browser}`
+      await driver.executeScript(`lambda-name=${testname}`);
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
