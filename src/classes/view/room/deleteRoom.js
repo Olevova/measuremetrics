@@ -12,9 +12,9 @@ class DeleteRoom extends Base {
     const rooms = await this.driver.findElements(By.css('.room-name'));
     for (let item of rooms) {
       if (item) {
-        const roomForDelete = item.getText()
+        const roomForDelete =await item.getText()
         // console.log(await item.getText());
-        if ((await roomForDelete.trim()) === room) {
+        if (await roomForDelete.trim() === room) {
           await this.driver.wait(
             until.elementLocated(By.css('.menu-list-dots-wrapper')),
             10000

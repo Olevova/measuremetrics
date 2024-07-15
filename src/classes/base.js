@@ -539,7 +539,8 @@ class Base {
     const listOfItem = await this.driver.findElements(By.css(selector));
     for (const [index, task] of listOfItem.entries()) {
       // console.log(await task.getText(), index);
-      if (item === (await task.getText())) {
+      const taskName = await task.getText();
+      if (item === (await taskName.trim())) {
         // console.log(index, 'index');
         const dotsMenuList = await this.driver.findElements(
           By.css('.dots-actions')
