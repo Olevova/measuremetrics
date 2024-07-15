@@ -15,8 +15,9 @@ class DeleteUnit extends Base{
             let noBtn = false;
             if(item){
                 const unitName = await item.findElement(By.css('.unit-name-wrapper p'));
-                // console.log(await unitName.getText(), unit );
-                if(await unitName.getText() === unit){
+                const unitNameForDel = await unitName.getText();
+                console.log(await unitName.getText(), unit, 'find unit' );
+                if(await unitNameForDel.trim() === unit){
                     const menuBtn = await item.findElement(By.id('menuListAddRoomOpen'));
                     await this.driver.wait(until.elementIsEnabled(menuBtn),10000);
                     noBtn = true;

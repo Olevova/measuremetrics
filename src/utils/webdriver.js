@@ -5,7 +5,7 @@ const safari = require('selenium-webdriver/safari');
 
 const browsers = [
     { browser: "Safari", bVersion: "17", os: "macOS Sonoma" },
-    { browser: "Chrome", bVersion: "126", os: "Windows 10" }
+    // { browser: "Chrome", bVersion: "126", os: "Windows 10" }
 ];
 
 const USERNAME = ltCapabilite.capability['LT:Options'].username;

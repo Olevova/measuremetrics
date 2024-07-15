@@ -95,7 +95,7 @@ describe('measuring time metrics for PM', async () => {
           ...sixthMeasure,
         };
         if (browser === 'Safari') {
-          saveMetrics(
+         saveMetrics(
             config.metricsFilePath,
             config.metricfileNameSafari,
             PMManagerMeasure
@@ -107,6 +107,7 @@ describe('measuring time metrics for PM', async () => {
             PMManagerMeasure
           );
         }
+        console.log('next step units delete');
         await deleteUnit.deleteUnit(config.duplicateUnitNamePM);
         await deleteUnit.checkDeleteUnit(config.duplicateUnitNamePM);
         await deleteUnit.deleteUnit(config.unitNamePM);
