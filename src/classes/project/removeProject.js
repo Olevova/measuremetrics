@@ -80,16 +80,16 @@ class RemoveProject extends Base {
       until.elementsLocated(By.className('project-name__wrapper')),
       10000
     );
-   
-   
-
+    const allProjects = await this.driver.findElements(
+      By.className('project-name__wrapper')
+    );
     if (allProjects) {
       await this.driver.sleep(2000);
       await this.waitListDate('.project-name__wrapper', 3);
-      const allProjects = await this.driver.findElements(
+      const projectList = await this.driver.findElements(
         By.className('project-name__wrapper')
       );
-      await RemoveProject.findProjectInList(allProjects, project);
+      await RemoveProject.findProjectInList(projectList, project);
       await this.driver.wait(until.elementLocated(By.id('settingsTab')),10000)
       await this.driver.findElement(By.id('settingsTab')).click()
       console.log('click on project');

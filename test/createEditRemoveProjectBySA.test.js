@@ -41,7 +41,7 @@ browsers.forEach(({browser, bVersion, os}) => {
       }
     });
 
-    it('create new project in the ${browser}', async () => {
+    it(`create new project in the ${browser}`, async () => {
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
@@ -94,7 +94,7 @@ browsers.forEach(({browser, bVersion, os}) => {
       }
     });
 
-    it('remove project in the ${browser}', async () => {
+    it(`remove project in the ${browser}`, async () => {
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
