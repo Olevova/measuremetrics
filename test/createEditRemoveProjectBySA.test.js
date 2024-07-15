@@ -9,7 +9,7 @@ const config = require('../src/utils/config');
 const { nanoid } = require('nanoid');
 
 browsers.forEach(({browser, bVersion, os}) => {
-  describe(`Create, edit and remove project by the SA and measure metrics in the ${browser}`, () => {
+  describe(`Create, edit and remove project by the SA and measure metrics in the`, () => {
     // here add parameters for creation
     let driver = null;
     let testname = '';
@@ -32,7 +32,7 @@ browsers.forEach(({browser, bVersion, os}) => {
 
     beforeEach(async () => {
       // testname = `Create, edit and remove project by the SA and measure metrics in the ${browser}`;
-      driver = await createDriver(browser, bVersion, os, testname);
+      driver = await createDriver(browser, bVersion, os);
     });
 
     afterEach(async () => {
@@ -41,7 +41,9 @@ browsers.forEach(({browser, bVersion, os}) => {
       }
     });
 
-    it(`create new project in the ${browser}`, async () => {
+    it(`create new project`, async () => {
+      testname = `Create new project in the ${browser}`;
+      await driver.executeScript(`lambda-name=${testname}`);
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
@@ -94,7 +96,9 @@ browsers.forEach(({browser, bVersion, os}) => {
       }
     });
 
-    it(`remove project in the ${browser}`, async () => {
+    it(`remove project`, async () => {
+      testname = `Create new project in the ${browser}`;
+      await driver.executeScript(`lambda-name=${testname}`);
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
