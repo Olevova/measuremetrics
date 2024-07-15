@@ -122,10 +122,7 @@ class Base {
 
     while (!element || element.length < 2) {
       element = await this.driver.findElements(By.css(selector)); // Use the provided selector
-      
       if (element.length < lngh) {
-        console.log(element.length, 'lenght');
-        console.log(counter, 'counter');
         await this.driver.sleep(1000);
       }
       counter += 1;

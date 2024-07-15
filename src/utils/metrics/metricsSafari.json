@@ -35,11 +35,15 @@
   },
   "2024-07-15": {
     "Time metrics for project creation by the SA": {
-      "project list load time": 1410.72,
-      "form load time for project creation": 22661.22,
-      "project creation form closing time": 21647.8,
-      "time for the project to appear in the list of projects": 38848.29,
-      "time to open project page": 6623.79
+      "project list load time": 965.25,
+      "form load time for project creation": 550.01,
+      "project creation form closing time": 515.63,
+      "time for the project to appear in the list of projects": 2500.26,
+      "time to open project page": 1564.64
+    },
+    "Time metrics for invite user by CA": {
+      "time to opent invite user form": 463.12,
+      "time to close invite user form": 768.74
     }
   }
 }

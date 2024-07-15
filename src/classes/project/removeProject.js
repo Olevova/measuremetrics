@@ -5,19 +5,15 @@ const Base = require('../base');
 class RemoveProject extends Base {
   static async findProjectInList(array, projectName) {
     let projectSearchName = '';
-    for(let i = 0; i < array.length; i += 1){
-      console.log(await array[i].getText(), 'in');
-    }
-    console.log('I am in project');
+    console.log('In project');
     for (let i = 0; i < array.length; i += 1) {
       projectSearchName = await array[i].getText();
-      console.log(projectSearchName, 'projectSearchName', projectName, projectSearchName === projectName);
-      if (projectSearchName === projectName) {
+      // console.log(projectSearchName, 'projectSearchName', projectName, projectSearchName.trim() === projectName);
+      if (projectSearchName.trim() === projectName) {
         // const parentElement = await array[i].findElement(By.xpath('..'));
         // const linkElement = await parentElement.findElement(
         //   By.css('a.view-link')
         // );
-        console.log('I am click here');
         await array[i].click();
         return;
       }

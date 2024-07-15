@@ -1,21 +1,20 @@
-const { browsers, createDriver } = require('../webdriver');
-const LoginPage = require('../../classes/auth/login');
-const ChangeAreaStatusInProjectProgress = require('../../classes/view/area/changeAreaStatusInProjectProgress');
-const makeScreenshot = require('../makeScreenShot');
+const { browsers, createDriver } = require('../src/utils/webdriver');
+const LoginPage = require('../src/classes/auth/login');
+const ChangeAreaStatusInProjectProgress = require('../src/classes/view/area/changeAreaStatusInProjectProgress');
+const makeScreenshot = require('../src/utils/makeScreenShot');
 const { describe } = require('mocha');
-const config = require('../config');
+const config = require('../src/utils/config');
 const { By, until } = require('selenium-webdriver');
-const { saveMetrics } = require('../saveMetrics');
+const { saveMetrics } = require('../src/utils/saveMetrics');
 
+browsers.forEach(({browser, bVersion, os}) => {
 describe('INP Measurement After Area Click', async () => {
-  browsers.forEach(({ browser, bVersion, os }) => {
     let driver = null;
     let openAreaFormINP = {
       'INP metrics': {},
     };
-    let testname = `INP Measurement After Area Click ${browser}`;
     beforeEach(async () => {
-      driver = await createDriver(browser, bVersion, os, testname);
+      driver = await createDriver(browser, bVersion, os);
     });
 
     afterEach(async () => {
@@ -25,6 +24,8 @@ describe('INP Measurement After Area Click', async () => {
     });
 
     it('INP check for open area pop-up', async () => {
+      testname = `INP check for open area pop-up ${browser}`;
+      await driver.executeScript(`lambda-name=${testname}`);
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);

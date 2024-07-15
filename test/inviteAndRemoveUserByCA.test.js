@@ -1,23 +1,23 @@
-const { browsers, createDriver } = require('../webdriver');
-const InviteUser = require('../../classes/user/inviteUser');
-const LoginPage = require('../../classes/auth/login');
-const RemoveUser = require('../../classes/user/removeUser');
-const makeScreenshot = require('../makeScreenShot');
-const { saveMetrics } = require('../saveMetrics');
+const { browsers, createDriver } = require('../src/utils/webdriver');
+const InviteUser = require('../src/classes/user/inviteUser');
+const LoginPage = require('../src/classes/auth/login');
+const RemoveUser = require('../src/classes/user/removeUser');
+const makeScreenshot = require('../src/utils/makeScreenShot');
+const { saveMetrics } = require('../src/utils/saveMetrics');
 const { describe } = require('mocha');
 const should = require('chai').should();
-const config = require('../config');
+const config = require('../src/utils/config');
 
+browsers.forEach(({browser, bVersion, os}) => {
 describe('Invite and remove user by the Company Admin and measure metrics', async () => {
   // time and site or lochalhost there tests are going
 
-  browsers.forEach(({ browser, bVersion, os }) => {
     let driver = null;
     let inviteUserMeasure = { 'Time metrics for invite user by CA': {} };
-    let testname = `Invite and remove user by the Company Admin and measure metrics in the ${browser}`;
+    let testname = ``
 
     beforeEach(async () => {
-      driver = await createDriver(browser, bVersion, os, testname);
+      driver = await createDriver(browser, bVersion, os);
     });
 
     afterEach(async () => {
@@ -29,7 +29,8 @@ describe('Invite and remove user by the Company Admin and measure metrics', asyn
 
     it('invite user by the company admin', async () => {
       // await driver.executeScript("document.body.style.zoom='50%'");
-
+      testname = `Invite user by the company admin in the ${browser}`;
+      await driver.executeScript(`lambda-name=${testname}`);
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
       const inviteUserTest = new InviteUser(driver);
       await logginPageTest.openLoginForm();
@@ -75,6 +76,9 @@ describe('Invite and remove user by the Company Admin and measure metrics', asyn
     });
 
     it('remove user by the company admin', async () => {
+      testname = `Remove user by the company admin in the ${browser}`;
+      await driver.executeScript(`lambda-name=${testname}`);
+
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
       const removeUserTest = new RemoveUser(driver);
       await logginPageTest.openLoginForm();

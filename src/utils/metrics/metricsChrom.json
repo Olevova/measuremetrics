@@ -9,5 +9,18 @@
       "saved new areas weight time": 3698.55,
       "save area comment time": 4644.03
     }
+  },
+  "2024-07-15": {
+    "Time metrics for project creation by the SA": {
+      "project list load time": 1025.99,
+      "form load time for project creation": 715.22,
+      "project creation form closing time": 776.34,
+      "time for the project to appear in the list of projects": 1672.58,
+      "time to open project page": 1840.31
+    },
+    "Time metrics for invite user by CA": {
+      "time to opent invite user form": 532.11,
+      "time to close invite user form": 916.76
+    }
   }
 }
