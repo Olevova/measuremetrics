@@ -97,7 +97,7 @@ browsers.forEach(({browser, bVersion, os}) => {
     });
 
     it(`remove project`, async () => {
-      testname = `Create new project in the ${browser}`;
+      testname = `Remove new project in the ${browser}`;
       await driver.executeScript(`lambda-name=${testname}`);
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 

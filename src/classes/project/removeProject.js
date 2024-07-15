@@ -11,7 +11,7 @@ class RemoveProject extends Base {
     console.log('I am in project');
     for (let i = 0; i < array.length; i += 1) {
       projectSearchName = await array[i].getText();
-      console.log(projectSearchName, 'projectSearchName');
+      console.log(projectSearchName, 'projectSearchName', projectName, projectSearchName === projectName);
       if (projectSearchName === projectName) {
         // const parentElement = await array[i].findElement(By.xpath('..'));
         // const linkElement = await parentElement.findElement(
