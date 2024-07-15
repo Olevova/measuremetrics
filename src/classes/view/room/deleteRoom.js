@@ -8,18 +8,21 @@ class DeleteRoom extends Base {
   }
 
   async deleteRoom(room) {
-    await this.driver.wait(until.elementsLocated(By.css('.room-arrow-with-name-wrapper')), 10000);
-    const rooms = await this.driver.findElements(By.css('.room-arrow-with-name-wrapper'));
+    await this.driver.wait(until.elementsLocated(By.css('.room-name')), 10000);
+    const rooms = await this.driver.findElements(By.css('.room-name'));
     for (let item of rooms) {
       if (item) {
-        const roomForDelete = await item.getAttribute('title');
+        const roomNamePart = await item.findElement(By.css('.room-arrow-with-name-wrapper'))
+        const roomForDelete = await roomNamePart.getAttribute('title');
         console.log(roomForDelete.trim(),room, 'its here', await roomForDelete.trim() === room.trim());
         // console.log(await item.getText());
         if (await roomForDelete.trim() === room.trim()) {
+          console.log("in el1");
           await this.driver.wait(
             until.elementLocated(By.css('.menu-list-dots-wrapper')),
             10000
           );
+          console.log("in el2");
           const menuBtn = await item.findElement(
             By.css('.menu-list-dots-wrapper')
           );
