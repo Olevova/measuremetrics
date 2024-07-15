@@ -1,14 +1,14 @@
-const { browsers, createDriver } = require('../src/utils/webdriver');
-const LoginPage = require('../src/classes/auth/login');
-const CreateProject = require('../src/classes/project/createProject');
-const RemoveProject = require('../src/classes/project/removeProject');
-const makeScreenshot = require('../src/utils/makeScreenShot');
-const { saveMetrics } = require('../src/utils/saveMetrics');
+const { browsers, createDriver } = require('../webdriver');
+const LoginPage = require('../../classes/auth/login');
+const CreateProject = require('../../classes/project/createProject');
+const RemoveProject = require('../../classes/project/removeProject');
+const makeScreenshot = require('../makeScreenShot');
+const { saveMetrics } = require('../saveMetrics');
 const { describe } = require('mocha');
-const config = require('../src/utils/config');
+const config = require('../config');
 const { nanoid } = require('nanoid');
 
-browsers.forEach(({browser, bVersion, os}) => {
+browsers.forEach(({ browser, bVersion, os }) => {
   describe(`Create, edit and remove project by the SA and measure metrics in the`, () => {
     // here add parameters for creation
     let driver = null;
@@ -55,7 +55,8 @@ browsers.forEach(({browser, bVersion, os}) => {
       await logginPageTest.login(config.urlhomePageForCheck);
 
       try {
-        const firstMeasure = await createProjectTest.goToProjectListMeasureTime();
+        const firstMeasure =
+          await createProjectTest.goToProjectListMeasureTime();
         const secondMeasure =
           await createProjectTest.fillCreateProjectFieldsMeasureTime(
             config.companyName,
@@ -82,16 +83,24 @@ browsers.forEach(({browser, bVersion, os}) => {
           ...thirdMeasure,
         };
 
-        if (browser === "Safari") {
-          saveMetrics(config.metricsFilePath, config.metricfileNameSafari, createProjectMesuer)
+        if (browser === 'Safari') {
+          saveMetrics(
+            config.metricsFilePath,
+            config.metricfileNameSafari,
+            createProjectMesuer
+          );
         } else {
-           saveMetrics(config.metricsFilePath, config.metricfileNameChrom, createProjectMesuer)
+          saveMetrics(
+            config.metricsFilePath,
+            config.metricfileNameChrom,
+            createProjectMesuer
+          );
         }
-        await driver.executeScript("lambda-status=passed");
+        await driver.executeScript('lambda-status=passed');
         // console.log(createProjectMesuer);
       } catch (error) {
         await makeScreenshot(driver, 'project_create');
-        await driver.executeScript("lambda-status=failed");
+        await driver.executeScript('lambda-status=failed');
         throw error;
       }
     });
@@ -112,12 +121,15 @@ browsers.forEach(({browser, bVersion, os}) => {
         await logginPageTest.login(config.urlhomePageForCheck);
 
         await removeProject.goToProjectList();
-        await removeProject.findProject(config.companyName, config.projectsPage);
+        await removeProject.findProject(
+          config.companyName,
+          config.projectsPage
+        );
         await removeProject.removefindProject(config.companyName);
-        await driver.executeScript("lambda-status=passed");
+        await driver.executeScript('lambda-status=passed');
       } catch (error) {
         await makeScreenshot(driver, 'project_remove');
-        await driver.executeScript("lambda-status=failed");
+        await driver.executeScript('lambda-status=failed');
         throw error;
       }
     });

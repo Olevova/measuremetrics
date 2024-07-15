@@ -1,14 +1,14 @@
-const { browsers, createDriver } = require('../src/utils/webdriver');
-const LoginPage = require('../src/classes/auth/login');
-const ChangeAreaStatusInProjectProgress = require('../src/classes/view/area/changeAreaStatusInProjectProgress');
-const makeScreenshot = require('../src/utils/makeScreenShot');
+const { browsers, createDriver } = require('../webdriver');
+const LoginPage = require('../../classes/auth/login');
+const ChangeAreaStatusInProjectProgress = require('../../classes/view/area/changeAreaStatusInProjectProgress');
+const makeScreenshot = require('../makeScreenShot');
 const { describe } = require('mocha');
-const config = require('../src/utils/config');
+const config = require('../config');
 const { By, until } = require('selenium-webdriver');
-const { saveMetrics } = require('../src/utils/saveMetrics');
+const { saveMetrics } = require('../saveMetrics');
 
-browsers.forEach(({browser, bVersion, os}) => {
-describe('INP Measurement After Area Click', async () => {
+browsers.forEach(({ browser, bVersion, os }) => {
+  describe('INP Measurement After Area Click', async () => {
     let driver = null;
     let openAreaFormINP = {
       'INP metrics': {},
