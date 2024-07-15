@@ -5,15 +5,19 @@ const Base = require('../base');
 class RemoveProject extends Base {
   static async findProjectInList(array, projectName) {
     let projectSearchName = '';
-
+    for(let i = 0; i < array.length; i += 1){
+      console.log(await array[i].getText(), 'in');
+    }
+    console.log('I am in project');
     for (let i = 0; i < array.length; i += 1) {
       projectSearchName = await array[i].getText();
-
+      console.log(projectSearchName, 'projectSearchName');
       if (projectSearchName === projectName) {
         // const parentElement = await array[i].findElement(By.xpath('..'));
         // const linkElement = await parentElement.findElement(
         //   By.css('a.view-link')
         // );
+        console.log('I am click here');
         await array[i].click();
         return;
       }
@@ -50,7 +54,7 @@ class RemoveProject extends Base {
 
     await this.driver.executeScript('return document.readyState');
     const numberOfProject = this.numberOfItemsInTheList('.item-info-list');
-    if(numberOfProject >=20){
+    if(numberOfProject >= 20){
       await this.driver.wait(
         until.elementLocated(By.id('selectAmountItems')),
         10000
@@ -65,6 +69,7 @@ class RemoveProject extends Base {
       );
       await this.findDateInDropDown(paginationList, '100');
       await this.waitListDate('.company-name', 11);
+
     }
 
   }
@@ -72,28 +77,34 @@ class RemoveProject extends Base {
   async findProject(project, page) {
     await this.driver.wait(until.urlIs(page), 10000);
     await this.driver.wait(
-      until.elementsLocated(By.className('company-name')),
+      until.elementsLocated(By.className('project-name__wrapper')),
       10000
     );
-    const allProjects = await this.driver.findElements(
-      By.className('company-name')
-    );
+   
    
 
     if (allProjects) {
+      await this.driver.sleep(2000);
+      await this.waitListDate('.project-name__wrapper', 3);
+      const allProjects = await this.driver.findElements(
+        By.className('project-name__wrapper')
+      );
       await RemoveProject.findProjectInList(allProjects, project);
       await this.driver.wait(until.elementLocated(By.id('settingsTab')),10000)
       await this.driver.findElement(By.id('settingsTab')).click()
+      console.log('click on project');
+      await this.driver.sleep(1000);
     }
   }
 
   async removefindProject(projectName) {
     await this.driver.executeScript('return document.readyState');
     await this.driver.wait(until.elementLocated(By.css('html')), 10000);
-
+    console.log('project inside');
     await this.driver.wait(
       until.elementLocated(By.id('btnDeleteProjectOpenModal'), 10000)
     );
+    
     const delBtnProject = await this.driver.findElements(
       By.id('btnDeleteProjectOpenModal')
     );

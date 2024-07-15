@@ -8,6 +8,38 @@
       "dropdown show weight time": 842.56,
       "saved new areas weight time": 3704.76,
       "save area comment time": 3085.49
+    },
+    "Time metrics for project creation by the SA": {
+      "project list load time": 957.23,
+      "form load time for project creation": 442.39,
+      "project creation form closing time": 528,
+      "time for the project to appear in the list of projects": 2553.57,
+      "time to open project page": 1609.64
+    },
+    "Time metrics for invite user by CA": {
+      "time to opent invite user form": 471.27,
+      "time to close invite user form": 814.2
+    },
+    "INP metrics": {
+      "INP Measurement After Area Click": 2526
+    }
+  },
+  "2024-07-11": {
+    "Time metrics for project creation by the SA": {
+      "project list load time": 1008.57,
+      "form load time for project creation": 480.43,
+      "project creation form closing time": 515.22,
+      "time for the project to appear in the list of projects": 1358.49,
+      "time to open project page": 1604.88
+    }
+  },
+  "2024-07-15": {
+    "Time metrics for project creation by the SA": {
+      "project list load time": 1410.72,
+      "form load time for project creation": 22661.22,
+      "project creation form closing time": 21647.8,
+      "time for the project to appear in the list of projects": 38848.29,
+      "time to open project page": 6623.79
     }
   }
 }

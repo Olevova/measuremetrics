@@ -1,0 +1,187 @@
+const { browsers, createDriver } = require('../webdriver');
+const LoginPage = require('../../classes/auth/login');
+const CreateUnit = require('../../classes/view/unit/createUnit');
+const DeleteUnit = require('../../classes/view/unit/deleteUnit');
+const CreateRoom = require('../../classes/view/room/createRoom');
+const DeleteRoom = require('../../classes/view/room/deleteRoom');
+const RoomTemplate = require('../../classes/view/room/roomTemplate');
+const DuplicateUnit = require('../../classes/view/unit/duplicateUnit');
+const CreateTask = require('../../classes/task/createTask');
+const FilterTaskByStatus = require('../../classes/task/filterTaskByStatus');
+const RemoveTask = require('../../classes/task/removeTask');
+const { saveMetrics } = require('../saveMetrics');
+const makeScreenshot = require('../makeScreenShot');
+const { describe } = require('mocha');
+const config = require('../config');
+const { nanoid } = require('nanoid');
+
+describe('measuring time metrics for PM', async () => {
+  browsers.forEach(({ browser, bVersion, os }) => {
+    let driver = null;
+    let PMManagerMeasure = {
+      'Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM':
+        {},
+    };
+    let testname = `measuring time metrics for PM ${browser}`;
+    const newRoomName = 'tr' + nanoid(5);
+
+    beforeEach(async () => {
+      driver = await createDriver(browser, bVersion, os, testname);
+    });
+
+    afterEach(async () => {
+      if (driver) {
+        await driver.quit();
+      }
+    });
+
+    it('Measure time needed to create unique room, template room, unit and duplicate unit by PM', async () => {
+      // time and site or lochalhost there tests are going
+      console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
+
+      const logginPageTest = new LoginPage(driver, config.urlLoginPage);
+      const createUnit = new CreateUnit(driver);
+      const createRoom = new CreateRoom(driver);
+      const roomTemplate = new RoomTemplate(driver);
+      const duplicateUnit = new DuplicateUnit(driver);
+      const deleteRoom = new DeleteRoom(driver);
+      const deleteUnit = new DeleteUnit(driver);
+
+      await logginPageTest.openLoginForm();
+      await logginPageTest.fillEmailInput(config.emailPM);
+      await logginPageTest.fillPasswordInput(config.passwordPM);
+      await logginPageTest.checkSaveForFuture();
+      await logginPageTest.login(config.mainCompanyPage);
+
+      try {
+        const firstMeasure = await createUnit.goToViewAndCheckMetrics(
+          config.projectNameMain,
+          config.projManager
+        );
+        const secondMeasure = await createRoom.createRoomMeasureMetrics(
+          '_',
+          newRoomName,
+          config.newAreaNamePM
+        );
+        console.log(secondMeasure, 'firstMeasure');
+        const thirdMeasure =
+          await createRoom.openCtreateRoomFormViaTemplateMeasureMetrics(
+            '_',
+            config.templateRoomPM
+          );
+        const fourthMeasure =
+          await roomTemplate.openEditTemplateFormMeasureMetrics(
+            '_',
+            config.templateRoomPM
+          );
+        const fifthMeasure = await createUnit.createUnitAndCheckMetrics(
+          config.unitNamePM
+        );
+        await createUnit.checkCreateUnit(config.unitNamePM);
+        const sixthMeasure = await duplicateUnit.duplicateUnitMeasureMetric();
+        PMManagerMeasure[
+          'Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'
+        ] = {
+          ...firstMeasure,
+          ...secondMeasure,
+          ...thirdMeasure,
+          ...fourthMeasure,
+          ...fifthMeasure,
+          ...sixthMeasure,
+        };
+        saveMetrics(
+          config.metricsFilePath,
+          config.metricfileName,
+          PMManagerMeasure
+        );
+        await deleteUnit.deleteUnit(config.duplicateUnitNamePM);
+        await deleteUnit.checkDeleteUnit(config.duplicateUnitNamePM);
+        await deleteUnit.deleteUnit(config.unitNamePM);
+        await deleteUnit.checkDeleteUnit(config.unitNamePM);
+        await deleteRoom.deleteRoom(newRoomName);
+        await deleteRoom.checkDeleteFloor(newRoomName);
+        if (browser === 'Safari') {
+          saveMetrics(
+            config.metricsFilePath,
+            config.metricfileNameSafari,
+            PMManagerMeasure
+          );
+        } else {
+          saveMetrics(
+            config.metricsFilePath,
+            config.metricfileNameChrom,
+            PMManagerMeasure
+          );
+        }
+        await driver.executeScript('lambda-status=passed');
+        await driver.sleep(1000);
+      } catch (error) {
+        await makeScreenshot(driver, 'unit_create');
+        await driver.executeScript('lambda-status=failed');
+        throw error;
+      }
+    });
+
+    it('PM creates the task on Tasks tab within the Project and measure metrics', async () => {
+      // time and site or lochalhost there tests are going
+      console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
+
+      const logginPageTest = new LoginPage(driver, config.urlLoginPage);
+      const createTask = new CreateTask(driver);
+      const filterTask = new FilterTaskByStatus(driver);
+      const removeTask = new RemoveTask(driver);
+
+      await logginPageTest.openLoginForm();
+      await logginPageTest.fillEmailInput(config.emailPM);
+      await logginPageTest.fillPasswordInput(config.passwordPM);
+      await logginPageTest.checkSaveForFuture();
+      await logginPageTest.login(config.mainCompanyPage);
+
+      try {
+        await createTask.goToView(config.projectNameMain, 'pm');
+        await createTask.goToSelektTab('Tasks');
+        const firstMeasure = await createTask.fillCreateTaskMeasureMetrics(
+          config.newFirstTaskNamePM,
+          config.newTaskDescriptionPM,
+          config.newTaskDueDataPM
+        );
+        const secondMeasure = await createTask.clickHideBtnAndMeasureMetrics();
+        const thirdMeasure = await filterTask.filterTasksByStatusMeasureMetrics(
+          'done'
+        );
+        PMManagerMeasure[
+          'Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'
+        ] = {
+          ...PMManagerMeasure[
+            'Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM'
+          ],
+          ...firstMeasure,
+          ...secondMeasure,
+          ...thirdMeasure,
+        };
+        await removeTask.taskRemove(config.newFirstTaskNamePM);
+        // console.log(firstMesure, 'firstMesure', secondMesure, 'secondMesure', thirdMesure, 'thirdMesure');
+        console.log(PMManagerMeasure, 'createTaskManagerMeasure');
+        if (browser === 'Safari') {
+          saveMetrics(
+            config.metricsFilePath,
+            config.metricfileNameSafari,
+            PMManagerMeasure
+          );
+        } else {
+          saveMetrics(
+            config.metricsFilePath,
+            config.metricfileNameChrom,
+            PMManagerMeasure
+          );
+        }
+        await driver.executeScript('lambda-status=passed');
+        await driver.sleep(1000);
+      } catch (error) {
+        await makeScreenshot(driver, 'task_create');
+        await driver.executeScript('lambda-status=failed');
+        throw error;
+      }
+    });
+  });
+});
