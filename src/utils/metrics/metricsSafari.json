@@ -44,6 +44,15 @@
     "Time metrics for invite user by CA": {
       "time to opent invite user form": 463.12,
       "time to close invite user form": 768.74
+    },
+    "Time metrics for change area status, weight and add comments by SU": {
+      "Open area ditails Pop Up time": 1419.35,
+      "Time areas appear on the \"Project Progress\" tab": 3748.89,
+      "dropdown show statuses time": 714.06,
+      "saved new areas status time": 3865.75,
+      "dropdown show weight time": 731.77,
+      "saved new areas weight time": 3740.68,
+      "save area comment time": 3088.35
     }
   }
 }

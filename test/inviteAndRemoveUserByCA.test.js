@@ -1,12 +1,12 @@
-const { browsers, createDriver } = require('../webdriver');
-const InviteUser = require('../../classes/user/inviteUser');
-const LoginPage = require('../../classes/auth/login');
-const RemoveUser = require('../../classes/user/removeUser');
-const makeScreenshot = require('../makeScreenShot');
-const { saveMetrics } = require('../saveMetrics');
+const { browsers, createDriver } = require('../src/utils/webdriver');
+const InviteUser = require('../src/classes/user/inviteUser');
+const LoginPage = require('../src/classes/auth/login');
+const RemoveUser = require('../src/classes/user/removeUser');
+const makeScreenshot = require('../src/utils/makeScreenShot');
+const { saveMetrics } = require('../src/utils/saveMetrics');
 const { describe } = require('mocha');
 const should = require('chai').should();
-const config = require('../config');
+const config = require('../src/utils/config');
 
 browsers.forEach(({ browser, bVersion, os }) => {
   describe('Invite and remove user by the Company Admin and measure metrics', async () => {

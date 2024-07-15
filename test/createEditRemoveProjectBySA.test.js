@@ -1,11 +1,11 @@
-const { browsers, createDriver } = require('../webdriver');
-const LoginPage = require('../../classes/auth/login');
-const CreateProject = require('../../classes/project/createProject');
-const RemoveProject = require('../../classes/project/removeProject');
-const makeScreenshot = require('../makeScreenShot');
-const { saveMetrics } = require('../saveMetrics');
+const { browsers, createDriver } = require('../src/utils/webdriver');
+const LoginPage = require('../src/classes/auth/login');
+const CreateProject = require('../src/classes/project/createProject');
+const RemoveProject = require('../src/classes/project/removeProject');
+const makeScreenshot = require('../src/utils/makeScreenShot');
+const { saveMetrics } = require('../src/utils/saveMetrics');
 const { describe } = require('mocha');
-const config = require('../config');
+const config = require('../src/utils/config');
 const { nanoid } = require('nanoid');
 
 browsers.forEach(({ browser, bVersion, os }) => {

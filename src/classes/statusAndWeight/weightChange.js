@@ -16,11 +16,11 @@ class WeightChange extends Base {
     let saveWeightTime;
     await this.driver.wait(until.elementLocated(By.css('html')), 10000);
     await this.driver.executeScript('return document.readyState');
-    const weightDropDown = await this.driver.findElement(By.id('weightSelect'));
+    const weightDropDown = await this.driver.findElement(By.css('.area__weight-btn'));
     startTime = performance.now();
     await weightDropDown.click();
     const weightList = await this.driver.findElements(
-      By.css('.ng-option[role="option"]')
+      By.css('.area__weight-menu__item')
     );
     await this.driver.wait(until.elementIsEnabled(weightList[0]),10000)
     endTime = performance.now();
@@ -43,10 +43,10 @@ class WeightChange extends Base {
   async findeWeightAndChangeIt(weight = 'medium') {
     await this.driver.wait(until.elementLocated(By.css('html')), 10000);
     await this.driver.executeScript('return document.readyState');
-    const weightDropDown = await this.driver.findElement(By.id('weightSelect'));
+    const weightDropDown = await this.driver.findElement(By.css('.area__weight-btn'));
     await weightDropDown.click();
     const weightList = await this.driver.findElements(
-      By.css('.ng-option[role="option"]')
+      By.css('.area__weight-menu__item')
     );
     await this.findDateInDropDown(await weightList, weight);
     await this.driver.wait(until.elementLocated(By.css('app-notification')),10000);
