@@ -20,11 +20,12 @@ async addCommentMeasureMetrics(comment) {
   const commentArea = await this.driver.findElement(
     By.css('.ql-editor.ql-blank')
   );
-  startTime = performance.now();
+  
   await commentArea.click();
   this.driver.wait(until.elementLocated(By.css('.btn-save-comment')), 10000);
   const saveBtn = await this.driver.findElement(By.css('.btn-save-comment'));
   await commentArea.sendKeys(comment);
+  startTime = performance.now();
   await this.driver.wait(until.elementIsVisible(saveBtn), 10000);
   await saveBtn.click();
   await this.driver.wait(until.elementIsNotVisible(saveBtn),10000);
