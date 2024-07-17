@@ -9,8 +9,10 @@ const config = require('../src/utils/config');
 const { nanoid } = require('nanoid');
 
 browsers.forEach(({ browser, bVersion, os }) => {
+  
   describe(`Create, edit and remove project by the SA and measure metrics in the`, () => {
     // here add parameters for creation
+    console.log(process.env);
     let driver = null;
     let testname = '';
     // let testname = `Create, edit and remove project by the SA and measure metrics in the ${browser}`

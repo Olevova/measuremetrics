@@ -399,11 +399,6 @@ class Base {
       .wait(until.elementLocated(By[locator](selector)), 200)
       .catch(() => null);
     if (formError) {
-      console.log(
-        await formError.getText(),
-        'text',
-        await formError.getAttribute('id')
-      );
       console.log('Error element exists:', formError);
       throw new Error('You have error, check screenshot');
     }
@@ -413,8 +408,6 @@ class Base {
       'Time before waiting for notification:',
       preWaitTime - startTime
     );
-    // await this.driver.wait(until.elementLocated(By.css('app-notification')),10000);
-    // await this.driver.wait(until.``)
     await this.driver.wait(
       until.elementLocated(By.className('notification')),
       15000
@@ -426,6 +419,7 @@ class Base {
 
     await this.driver.wait(until.elementIsVisible(windowHandles), 15000);
     console.log('after located handle');
+    
     const windowHandlesText = await windowHandles.getText();
 
     if (windowHandlesText === 'Error. Failed to save data') {
