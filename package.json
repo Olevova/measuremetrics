@@ -6,6 +6,7 @@
   "scripts": {
     "import-tests": "set TESTOMATIO=tstmt_hPNdb80OrOnIZL94TWhW15LtzsXiprUlVw1719249035&& npx check-tests@latest Mocha \"**/*{.,_}{test,spec,cy}.js\"",
     "test": "DEBUG=testomatio:* TESTOMATIO=tstmt_hPNdb80OrOnIZL94TWhW15LtzsXiprUlVw1719249035 npx mocha --no-timeouts -R ./node_modules/@testomatio/reporter/lib/adapter/mocha.js",
+    "testLocal": "node testRunner.js",
     "test1": "set DEBUG=testomatio:* && set TESTOMATIO=tstmt_C5vBFRub72c_muiqpdBcAnhlnuW47aHfyw1718280379&& npx mocha --no-timeouts -R ./node_modules/@testomatio/reporter/lib/adapter/mocha.js",
     "test2": "mocha --no-timeouts --reporter mochawesome --require mochawesome/register --reporter-options  reportDir=colorjob,reportFilename=reports ",
     "onetest": "mocha --no-timeouts --reporter mochawesome --require mochawesome/register --reporter-options reportDir=colorjob,reportFilename=reports test/createEditRemoveProjectBySA.test.js",

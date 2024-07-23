@@ -1,4 +1,5 @@
-const { browsers, createDriver } = require('../src/utils/webdriver');
+const { browsers, createDriver,  isRunningInTeamCity,
+  isRunningInDocker, } = require('../src/utils/webdriver');
 const LoginPage = require('../src/classes/auth/login');
 const CreateUnit = require('../src/classes/view/unit/createUnit');
 const DeleteUnit = require('../src/classes/view/unit/deleteUnit');
@@ -15,16 +16,14 @@ const { describe } = require('mocha');
 const config = require('../src/utils/config');
 const { nanoid } = require('nanoid');
 
-browsers.forEach(({ browser, bVersion, os }) => {
 describe('measuring time metrics for PM', async () => {
-  
     let driver = null;
-    let testname = ``
+    let testname = ``;
     let PMManagerMeasure = {
       'Time metrics for creating unique room, template room, unit and duplicate unit, create task by PM':
         {},
     };
-    
+
     const newRoomName = 'tr' + nanoid(5);
 
     beforeEach(async () => {
@@ -39,9 +38,10 @@ describe('measuring time metrics for PM', async () => {
 
     it('Measure time needed to create unique room, template room, unit and duplicate unit by PM', async () => {
       // time and site or lochalhost there tests are going
-      testname = `Measure time needed to create unique room, template room, unit and duplicate unit by PM in the ${browser}`
+      if (isRunningInDocker || isRunningInTeamCity) {
+      testname = `Measure time needed to create unique room, template room, unit and duplicate unit by PM in the ${browser}`;
       await driver.executeScript(`lambda-name=${testname}`);
-      
+      }
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
@@ -95,7 +95,7 @@ describe('measuring time metrics for PM', async () => {
           ...sixthMeasure,
         };
         if (browser === 'Safari') {
-         saveMetrics(
+          saveMetrics(
             config.metricsFilePath,
             config.metricfileNameSafari,
             PMManagerMeasure
@@ -127,19 +127,25 @@ describe('measuring time metrics for PM', async () => {
             PMManagerMeasure
           );
         }
+        if (isRunningInDocker || isRunningInTeamCity) {
         await driver.executeScript('lambda-status=passed');
+        }
         await driver.sleep(1000);
       } catch (error) {
         await makeScreenshot(driver, 'unit_create');
+        if (isRunningInDocker || isRunningInTeamCity) {
         await driver.executeScript('lambda-status=failed');
+        }
         throw error;
       }
     });
 
     it('PM creates the task on Tasks tab within the Project and measure metrics', async () => {
       // time and site or lochalhost there tests are going
-      testname = `PM creates the task on Tasks tab within the Project and measure metrics in the ${browser}`
+      if (isRunningInDocker || isRunningInTeamCity) {
+      testname = `PM creates the task on Tasks tab within the Project and measure metrics in the ${browser}`;
       await driver.executeScript(`lambda-name=${testname}`);
+      }
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
@@ -191,13 +197,16 @@ describe('measuring time metrics for PM', async () => {
             PMManagerMeasure
           );
         }
+        if (isRunningInDocker || isRunningInTeamCity) {
         await driver.executeScript('lambda-status=passed');
+        }
         await driver.sleep(1000);
       } catch (error) {
         await makeScreenshot(driver, 'task_create');
+        if (isRunningInDocker || isRunningInTeamCity) {
         await driver.executeScript('lambda-status=failed');
+        }
         throw error;
       }
     });
   });
-});

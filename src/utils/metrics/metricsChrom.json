@@ -1,26 +1,15 @@
 {
-  "2024-07-10": {
-    "Time metrics for change area status, weight and add comments by SU": {
-      "Open area ditails Pop Up time": 2625.95,
-      "Time areas appear on the \"Project Progress\" tab": 15183.32,
-      "dropdown show statuses time": 1058.92,
-      "saved new areas status time": 4210.56,
-      "dropdown show weight time": 1008.97,
-      "saved new areas weight time": 3698.55,
-      "save area comment time": 4644.03
-    }
-  },
-  "2024-07-15": {
+  "2024-07-17": {
     "Time metrics for project creation by the SA": {
-      "project list load time": 1025.99,
-      "form load time for project creation": 715.22,
-      "project creation form closing time": 776.34,
-      "time for the project to appear in the list of projects": 1672.58,
-      "time to open project page": 1840.31
+      "project list load time": 795.35,
+      "form load time for project creation": 231.69,
+      "project creation form closing time": 1003.41,
+      "time for the project to appear in the list of projects": 2108.97,
+      "time to open project page": 801.09
     },
     "Time metrics for invite user by CA": {
-      "time to opent invite user form": 532.11,
-      "time to close invite user form": 916.76
+      "time to opent invite user form": 135.63,
+      "time to close invite user form": 2343.09
     }
   }
 }

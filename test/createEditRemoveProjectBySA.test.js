@@ -1,4 +1,9 @@
-const { browsers, createDriver } = require('../src/utils/webdriver');
+const {
+  browsers,
+  createDriver,
+  isRunningInTeamCity,
+  isRunningInDocker,
+} = require('../src/utils/webdriver');
 const LoginPage = require('../src/classes/auth/login');
 const CreateProject = require('../src/classes/project/createProject');
 const RemoveProject = require('../src/classes/project/removeProject');
@@ -8,14 +13,10 @@ const { describe } = require('mocha');
 const config = require('../src/utils/config');
 const { nanoid } = require('nanoid');
 
-browsers.forEach(({ browser, bVersion, os }) => {
-  
-  describe(`Create, edit and remove project by the SA and measure metrics in the`, () => {
-    // here add parameters for creation
-    console.log(process.env);
+const runTests = (browser, bVersion, os) => {
+  describe(`Create, edit and remove project by the SA and measure metrics in ${browser}`, () => {
     let driver = null;
     let testname = '';
-    // let testname = `Create, edit and remove project by the SA and measure metrics in the ${browser}`
     let createProjectMesuer = {
       'Time metrics for project creation by the SA': {},
     };
@@ -33,7 +34,6 @@ browsers.forEach(({ browser, bVersion, os }) => {
     const eneDate = '12.12.25';
 
     beforeEach(async () => {
-      // testname = `Create, edit and remove project by the SA and measure metrics in the ${browser}`;
       driver = await createDriver(browser, bVersion, os);
     });
 
@@ -44,8 +44,10 @@ browsers.forEach(({ browser, bVersion, os }) => {
     });
 
     it(`create new project`, async () => {
-      testname = `Create new project in the ${browser}`;
-      await driver.executeScript(`lambda-name=${testname}`);
+      if (isRunningInDocker || isRunningInTeamCity) {
+        testname = `Create new project in ${browser}`;
+        await driver.executeScript(`lambda-name=${testname}`);
+      }
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
@@ -98,18 +100,23 @@ browsers.forEach(({ browser, bVersion, os }) => {
             createProjectMesuer
           );
         }
-        await driver.executeScript('lambda-status=passed');
-        // console.log(createProjectMesuer);
+        if (isRunningInDocker || isRunningInTeamCity) {
+          await driver.executeScript('lambda-status=passed');
+        }
       } catch (error) {
         await makeScreenshot(driver, 'project_create');
-        await driver.executeScript('lambda-status=failed');
+        if (isRunningInDocker || isRunningInTeamCity) {
+          await driver.executeScript('lambda-status=failed');
+        }
         throw error;
       }
     });
 
     it(`remove project`, async () => {
-      testname = `Remove new project in the ${browser}`;
-      await driver.executeScript(`lambda-name=${testname}`);
+      if (isRunningInDocker || isRunningInTeamCity) {
+        testname = `Remove new project in ${browser}`;
+        await driver.executeScript(`lambda-name=${testname}`);
+      }
       console.log(Date().toLocaleLowerCase(), 'date', config.urlLoginPage);
 
       const logginPageTest = new LoginPage(driver, config.urlLoginPage);
@@ -128,12 +135,24 @@ browsers.forEach(({ browser, bVersion, os }) => {
           config.projectsPage
         );
         await removeProject.removefindProject(config.companyName);
-        await driver.executeScript('lambda-status=passed');
+        if (isRunningInDocker || isRunningInTeamCity) {
+          await driver.executeScript('lambda-status=passed');
+        }
       } catch (error) {
         await makeScreenshot(driver, 'project_remove');
-        await driver.executeScript('lambda-status=failed');
+        if (isRunningInDocker || isRunningInTeamCity) {
+          await driver.executeScript('lambda-status=failed');
+        }
         throw error;
       }
     });
   });
-});
+};
+
+if (isRunningInDocker || isRunningInTeamCity) {
+  browsers.forEach(({ browser, bVersion, os }) => {
+    runTests(browser, bVersion, os);
+  });
+} else {
+  runTests('Chrome', '125', 'local');
+}
